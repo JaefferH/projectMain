@@ -81,7 +81,8 @@ export const useAppStore = create<AppState>()(
         const admin = admins.find(a => a.username.toLowerCase() === u) || 
           (u === 'admin' || u === 'mudir' || u === 'abuki' ? { id: 'admin1', fullName: 'System Administrator', username: u } : null);
         if (admin) {
-          const validAdminPass = p === 'admin123' || p === 'newadmin@123' || p === 'admin' || p === 'ia4c&2@jhnr' || (admin as any).password === p;
+          const expectedPass = (admin as any).password || 'admin123';
+          const validAdminPass = p === expectedPass || (admin as any).password === p;
           if (validAdminPass) {
             set({
               authenticated: true,
@@ -99,7 +100,8 @@ export const useAppStore = create<AppState>()(
         const teacher = teachers.find(t => t.username.toLowerCase() === u) ||
           (u === 'teacher1' || u === 'teacher2' ? { id: u === 'teacher2' ? 'tch_2' : 'tch_1', fullName: u === 'teacher2' ? 'Ustadh Jaffer' : 'Ustaz Ali', username: u } : null);
         if (teacher) {
-          const validTeacherPass = p === 'password123' || p === 'teacher' || (teacher as any).password === p;
+          const expectedPass = (teacher as any).password || 'password123';
+          const validTeacherPass = p === expectedPass || (teacher as any).password === p;
           if (validTeacherPass) {
             set({
               authenticated: true,
@@ -114,10 +116,11 @@ export const useAppStore = create<AppState>()(
         }
 
         // 3. Student Match
-        const student = students.find(s => s.registrationNumber.toLowerCase() === u || s.fullName.toLowerCase() === u) ||
+        const student = students.find(s => (s.registrationNumber || '').toLowerCase() === u || s.fullName.toLowerCase() === u) ||
           (u === 'student' || u === 'student1' ? { id: 'stu_1', fullName: 'Bilal Ibrahim', registrationNumber: 'SBI0001' } : null);
         if (student) {
-          const validStudentPass = p === 'password123' || p === 'student' || (student as any).password === p;
+          const expectedPass = (student as any).password || 'password123';
+          const validStudentPass = p === expectedPass || (student as any).password === p;
           if (validStudentPass) {
             set({
               authenticated: true,
@@ -150,7 +153,26 @@ export const useAppStore = create<AppState>()(
       updateUserProfile: (updates) => set((state) => ({
         currentUser: state.currentUser ? { ...state.currentUser, ...updates } : state.currentUser,
       })),
-      updatePassword: (newPassword) => set({ userPassword: newPassword }),
+      updatePassword: (newPassword) => {
+        const state = useAppStore.getState();
+        const dataStore = useDataStore.getState();
+        const { currentUser, userRole } = state;
+
+        if (currentUser?.id) {
+          if (userRole === 'admin') {
+            const admin = dataStore.admins.find(a => a.id === currentUser.id || a.username === currentUser.username);
+            if (admin) {
+              dataStore.updateAdmin(admin.id, { ...admin, password: newPassword });
+            }
+          } else if (userRole === 'teacher') {
+            const teacher = dataStore.teachers.find(t => t.id === currentUser.id || t.username === currentUser.username);
+            if (teacher) {
+              dataStore.updateTeacher({ ...teacher, password: newPassword });
+            }
+          }
+        }
+        set({ userPassword: newPassword });
+      },
     }),
     {
       name: 'al-imam-app-storage',

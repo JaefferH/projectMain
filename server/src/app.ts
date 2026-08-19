@@ -75,7 +75,8 @@ app.post(loginRoutes, (req, res) => {
   const isAdminUsername = cleanUsername === 'admin' || cleanUsername === 'mudir' || cleanUsername === 'abuki' || !!foundAdmin;
 
   if (isAdminUsername) {
-    const isPassCorrect = cleanPassword === 'admin123' || cleanPassword === 'newadmin@123' || cleanPassword === 'admin' || cleanPassword === 'ia4c&2@jhnr' || (foundAdmin && (foundAdmin.password === password || foundAdmin.password === cleanPassword));
+    const expectedPassword = foundAdmin?.password || 'admin123';
+    const isPassCorrect = cleanPassword === expectedPassword || (foundAdmin && (foundAdmin.password === password || foundAdmin.password === cleanPassword));
     if (isPassCorrect) {
       const user = {
         id: foundAdmin?.id || 'admin_1',
@@ -106,7 +107,8 @@ app.post(loginRoutes, (req, res) => {
   const isTeacherUsername = cleanUsername === 'teacher1' || cleanUsername === 'teacher2' || cleanUsername.startsWith('teacher') || !!foundTeacher;
 
   if (isTeacherUsername) {
-    const isPassCorrect = cleanPassword === 'password123' || cleanPassword === 'teacher' || (foundTeacher && (foundTeacher.password === password || foundTeacher.password === cleanPassword));
+    const expectedPassword = foundTeacher?.password || 'password123';
+    const isPassCorrect = cleanPassword === expectedPassword || (foundTeacher && (foundTeacher.password === password || foundTeacher.password === cleanPassword));
     if (isPassCorrect) {
       const user = {
         id: foundTeacher?.id || (cleanUsername === 'teacher2' ? 'tch_2' : 'tch_1'),
@@ -140,7 +142,8 @@ app.post(loginRoutes, (req, res) => {
   const isStudentUsername = cleanUsername === 'student' || cleanUsername === 'student1' || cleanUsername.startsWith('stu') || !!foundStudent;
 
   if (isStudentUsername) {
-    const isPassCorrect = cleanPassword === 'password123' || cleanPassword === 'student' || (foundStudent && (foundStudent.password === password || foundStudent.password === cleanPassword));
+    const expectedPassword = foundStudent?.password || 'password123';
+    const isPassCorrect = cleanPassword === expectedPassword || (foundStudent && (foundStudent.password === password || foundStudent.password === cleanPassword));
     if (isPassCorrect) {
       const user = {
         id: foundStudent?.id || 'stu_1',
