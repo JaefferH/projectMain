@@ -88,11 +88,4 @@ Backend API runs on `http://localhost:5000/`
 npm run build
 ```
 
----
 
-## 👤 Developer & Credit
-
-Developed with care for **Al Imam Hassan Mosque & Madrasah**.
-
-* **Developer**: **Jaeffer Hussein**
-* **Contact Email**: `Jaefferhussein@gmail.com`
