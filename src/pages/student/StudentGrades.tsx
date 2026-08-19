@@ -39,7 +39,7 @@ export default function StudentGrades() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="border-b border-[#d4af37]/15 bg-black/40 text-[#d4af37]">
+              <tr className="border-b border-emerald-500/30 bg-emerald-100/90 dark:bg-black/40 text-[#047857] dark:text-[#fef08a] text-xs uppercase tracking-wider font-extrabold">
                 <th className="p-4 font-semibold text-sm">Course Name</th>
                 <th className="p-4 font-semibold text-sm text-center">Quiz 1 (/15)</th>
                 <th className="p-4 font-semibold text-sm text-center">Quiz 2 (/15)</th>
@@ -63,18 +63,18 @@ export default function StudentGrades() {
                 return (
                   <motion.tr
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: idx * 0.05 }}
-                    key={course.id} className="border-b border-white/5 hover:bg-white/5 transition-colors"
+                    key={course.id} className="border-b border-emerald-500/20 hover:bg-emerald-500/10 transition-colors"
                   >
-                    <td className="p-4 font-bold text-white">
+                    <td className="p-4 font-bold text-[#042c22] dark:text-white">
                       {course.name}
-                      <span className="block text-xs text-[#d4af37] font-normal">{course.id}</span>
+                      <span className="block text-xs text-[#047857] dark:text-[#d4af37] font-semibold">{course.id}</span>
                     </td>
-                    <td className="p-4 text-center font-semibold text-white">{q1}</td>
-                    <td className="p-4 text-center font-semibold text-white">{q2}</td>
-                    <td className="p-4 text-center font-semibold text-white">{mid}</td>
-                    <td className="p-4 text-center font-semibold text-white">{final}</td>
-                    <td className="p-4 text-center font-bold text-white text-base">
-                      {total}<span className="text-white/40 text-xs">/100</span>
+                    <td className="p-4 text-center font-extrabold text-[#042c22] dark:text-white">{q1}</td>
+                    <td className="p-4 text-center font-extrabold text-[#042c22] dark:text-white">{q2}</td>
+                    <td className="p-4 text-center font-extrabold text-[#042c22] dark:text-white">{mid}</td>
+                    <td className="p-4 text-center font-extrabold text-[#042c22] dark:text-white">{final}</td>
+                    <td className="p-4 text-center font-extrabold text-[#042c22] dark:text-white text-base">
+                      {total}<span className="text-[#047857] dark:text-white/60 text-xs">/100</span>
                     </td>
                     <td className="p-4 text-center">
                       <span className={`px-3 py-1 rounded-full text-xs font-black ${grade.bg} ${grade.color}`}>
