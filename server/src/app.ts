@@ -19,9 +19,19 @@ if (!fs.existsSync(dataDir)) {
 
 function readJson(file: string, fallback: any = []) {
   const fp = path.join(dataDir, file);
-  if (!fs.existsSync(fp)) return fallback;
+  if (!fs.existsSync(fp)) {
+    if (fallback && Array.isArray(fallback) && fallback.length > 0) {
+      try { fs.writeFileSync(fp, JSON.stringify(fallback, null, 2), "utf8"); } catch {}
+    }
+    return fallback;
+  }
   try {
-    return JSON.parse(fs.readFileSync(fp, "utf8"));
+    const data = JSON.parse(fs.readFileSync(fp, "utf8"));
+    if (Array.isArray(data) && data.length === 0 && Array.isArray(fallback) && fallback.length > 0) {
+      try { fs.writeFileSync(fp, JSON.stringify(fallback, null, 2), "utf8"); } catch {}
+      return fallback;
+    }
+    return data;
   } catch {
     return fallback;
   }
@@ -75,16 +85,17 @@ app.post(loginRoutes, (req, res) => {
   const isAdminUsername = cleanUsername === 'admin' || cleanUsername === 'mudir' || cleanUsername === 'abuki' || !!foundAdmin;
 
   if (isAdminUsername) {
-    const expectedPassword = foundAdmin?.password || 'admin123';
-    const isPassCorrect = cleanPassword === expectedPassword || (foundAdmin && (foundAdmin.password === password || foundAdmin.password === cleanPassword));
-    if (isPassCorrect) {
+    const adminRecord = foundAdmin || admins[0] || defaultAdmins[0];
+    const expectedPassword = (adminRecord.password || 'admin123').trim();
+
+    if (cleanPassword === expectedPassword) {
       const user = {
-        id: foundAdmin?.id || 'admin_1',
-        username: foundAdmin?.username || username || 'admin',
+        id: adminRecord.id || 'admin_1',
+        username: adminRecord.username || username || 'admin',
         role: 'ADMIN',
         roles: ['SUPER_ADMIN'],
-        name: foundAdmin?.fullName || 'Master Admin',
-        email: foundAdmin?.email || 'admin@madrassa.local'
+        name: adminRecord.fullName || 'Master Admin',
+        email: adminRecord.email || 'admin@madrassa.local'
       };
       return res.json({
         success: true,
@@ -107,15 +118,16 @@ app.post(loginRoutes, (req, res) => {
   const isTeacherUsername = cleanUsername === 'teacher1' || cleanUsername === 'teacher2' || cleanUsername.startsWith('teacher') || !!foundTeacher;
 
   if (isTeacherUsername) {
-    const expectedPassword = foundTeacher?.password || 'password123';
-    const isPassCorrect = cleanPassword === expectedPassword || (foundTeacher && (foundTeacher.password === password || foundTeacher.password === cleanPassword));
-    if (isPassCorrect) {
+    const teacherRecord = foundTeacher || teachers[0] || defaultTeachers[0];
+    const expectedPassword = (teacherRecord.password || 'password123').trim();
+
+    if (cleanPassword === expectedPassword) {
       const user = {
-        id: foundTeacher?.id || (cleanUsername === 'teacher2' ? 'tch_2' : 'tch_1'),
-        username: foundTeacher?.username || username || 'teacher1',
+        id: teacherRecord.id || (cleanUsername === 'teacher2' ? 'tch_2' : 'tch_1'),
+        username: teacherRecord.username || username || 'teacher1',
         role: 'TEACHER',
         roles: ['TEACHER'],
-        name: foundTeacher?.fullName || (cleanUsername === 'teacher2' ? 'Ustadh Jaffer' : 'Ustaz Ali'),
+        name: teacherRecord.fullName || (cleanUsername === 'teacher2' ? 'Ustadh Jaffer' : 'Ustaz Ali'),
         email: `${username || 'teacher'}@madrassa.local`
       };
       return res.json({
@@ -142,15 +154,16 @@ app.post(loginRoutes, (req, res) => {
   const isStudentUsername = cleanUsername === 'student' || cleanUsername === 'student1' || cleanUsername.startsWith('stu') || !!foundStudent;
 
   if (isStudentUsername) {
-    const expectedPassword = foundStudent?.password || 'password123';
-    const isPassCorrect = cleanPassword === expectedPassword || (foundStudent && (foundStudent.password === password || foundStudent.password === cleanPassword));
-    if (isPassCorrect) {
+    const studentRecord = foundStudent || students[0] || { id: 'stu_1', fullName: 'Bilal Ibrahim', registrationNumber: 'SBI0001', password: 'password123' };
+    const expectedPassword = (studentRecord.password || 'password123').trim();
+
+    if (cleanPassword === expectedPassword) {
       const user = {
-        id: foundStudent?.id || 'stu_1',
-        username: foundStudent?.registrationNumber || username || 'student1',
+        id: studentRecord.id || 'stu_1',
+        username: studentRecord.registrationNumber || username || 'student1',
         role: 'STUDENT',
         roles: ['STUDENT'],
-        name: foundStudent?.fullName || 'Bilal Ibrahim',
+        name: studentRecord.fullName || 'Bilal Ibrahim',
         email: `${username || 'student'}@madrassa.local`
       };
       return res.json({
@@ -404,8 +417,32 @@ app.put('/api/students/:id/attendance', (req, res) => {
   res.json(records);
 });
 
-// Generic CRUD for Courses, Finance, Admins
-['courses', 'finance', 'admins'].forEach((entity) => {
+// Explicit Admin Update Handler
+app.put(['/api/admins/:id', '/api/admins/:id/'], (req, res) => {
+  let admins = readJson('admins.json', defaultAdmins);
+  const targetId = req.params.id;
+  const updates = req.body || {};
+
+  let found = false;
+  admins = admins.map((a: any) => {
+    if (a.id === targetId || (a.username || '').toLowerCase() === (updates.username || targetId || '').toLowerCase() || a.username === 'admin') {
+      found = true;
+      return { ...a, ...updates, id: a.id };
+    }
+    return a;
+  });
+
+  if (!found && updates) {
+    admins.push({ id: targetId || 'admin_1', ...updates });
+  }
+
+  writeJson('admins.json', admins);
+  const updatedAdmin = admins.find((a: any) => a.id === targetId || a.username === 'admin') || updates;
+  res.json(updatedAdmin);
+});
+
+// Generic CRUD for Courses, Finance
+['courses', 'finance'].forEach((entity) => {
   app.post(`/api/${entity}`, (req, res) => {
     const list = readJson(`${entity}.json`, []);
     const newItem = { id: req.body.id || `${entity}_${Date.now()}`, ...req.body };
