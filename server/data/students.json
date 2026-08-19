@@ -1,0 +1,114 @@
+[
+  {
+    "id": "stu_1786480660089",
+    "fullName": "sa",
+    "fathersName": "as",
+    "mothersName": "dwd",
+    "phone": "",
+    "address": "",
+    "registrationNumber": "SSA0001",
+    "enrolledCourseIds": [],
+    "academicHistory": [],
+    "totalFee": 1500,
+    "amountPaid": 0
+  },
+  {
+    "id": "stu_1786480660828",
+    "fullName": "sa",
+    "fathersName": "as",
+    "mothersName": "dwdsd",
+    "phone": "",
+    "address": "",
+    "registrationNumber": "SSA0002",
+    "enrolledCourseIds": [],
+    "academicHistory": [],
+    "totalFee": 1500,
+    "amountPaid": 0
+  },
+  {
+    "id": "stu_1786480661366",
+    "fullName": "sa",
+    "fathersName": "as",
+    "mothersName": "dwdsdc",
+    "phone": "",
+    "address": "",
+    "registrationNumber": "SSA0003",
+    "enrolledCourseIds": [],
+    "academicHistory": [],
+    "totalFee": 1500,
+    "amountPaid": 0
+  },
+  {
+    "id": "stu_1786480676600",
+    "fullName": "fs",
+    "fathersName": "s",
+    "mothersName": "wdwd",
+    "phone": "",
+    "address": "",
+    "registrationNumber": "SFS0004",
+    "enrolledCourseIds": [],
+    "academicHistory": [],
+    "totalFee": 1500,
+    "amountPaid": 0
+  },
+  {
+    "id": "stu_test_1786480974129",
+    "fullName": "Test Student",
+    "registrationNumber": "REG-TEST-01",
+    "enrolledCourseIds": [
+      "crs_1"
+    ],
+    "totalFee": 1500,
+    "amountPaid": 500
+  },
+  {
+    "id": "stu_1786481072439",
+    "fullName": "bgc",
+    "fathersName": "bc",
+    "mothersName": "b",
+    "phone": "",
+    "address": "",
+    "registrationNumber": "SBB0006",
+    "enrolledCourseIds": [
+      "crs_1"
+    ],
+    "academicHistory": [],
+    "totalFee": 1500,
+    "amountPaid": 0
+  },
+  {
+    "id": "stu_1786481081473",
+    "fullName": "bfx",
+    "fathersName": "bf",
+    "mothersName": "fx",
+    "phone": "",
+    "address": "",
+    "registrationNumber": "SBB0007",
+    "enrolledCourseIds": [
+      "crs_1"
+    ],
+    "academicHistory": [],
+    "totalFee": 1500,
+    "amountPaid": 0
+  },
+  {
+    "id": "stu_test_1786481370540",
+    "fullName": "Test Student",
+    "registrationNumber": "REG-TEST-01",
+    "enrolledCourseIds": [
+      "crs_1"
+    ],
+    "totalFee": 1500,
+    "amountPaid": 500
+  },
+  {
+    "id": "stu_test_1786821948445",
+    "fullName": "Test Student",
+    "registrationNumber": "REG-TEST-01",
+    "enrolledCourseIds": [
+      "crs_1"
+    ],
+    "totalFee": 1500,
+    "amountPaid": 500
+  }
+]

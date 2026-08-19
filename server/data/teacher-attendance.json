@@ -1,0 +1,80 @@
+[
+  {
+    "id": "tatt_1",
+    "teacherId": "tch_1",
+    "date": "2026-08-11",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_1_2026-08-15",
+    "teacherId": "tch_1",
+    "date": "2026-08-15",
+    "status": "Absent"
+  },
+  {
+    "id": "tatt_tch_2_2026-08-15",
+    "teacherId": "tch_2",
+    "date": "2026-08-15",
+    "status": "Permission"
+  },
+  {
+    "id": "tatt_tch_1786480270091_2026-08-15",
+    "teacherId": "tch_1786480270091",
+    "date": "2026-08-15",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_test_1786480974141_2026-08-15",
+    "teacherId": "tch_test_1786480974141",
+    "date": "2026-08-15",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_test_1786481370551_2026-08-15",
+    "teacherId": "tch_test_1786481370551",
+    "date": "2026-08-15",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_test_1786821948458_2026-08-15",
+    "teacherId": "tch_test_1786821948458",
+    "date": "2026-08-15",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_1_2026-08-19",
+    "teacherId": "tch_1",
+    "date": "2026-08-19",
+    "status": "Absent"
+  },
+  {
+    "id": "tatt_tch_2_2026-08-19",
+    "teacherId": "tch_2",
+    "date": "2026-08-19",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_1786480270091_2026-08-19",
+    "teacherId": "tch_1786480270091",
+    "date": "2026-08-19",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_test_1786480974141_2026-08-19",
+    "teacherId": "tch_test_1786480974141",
+    "date": "2026-08-19",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_test_1786481370551_2026-08-19",
+    "teacherId": "tch_test_1786481370551",
+    "date": "2026-08-19",
+    "status": "Present"
+  },
+  {
+    "id": "tatt_tch_test_1786821948458_2026-08-19",
+    "teacherId": "tch_test_1786821948458",
+    "date": "2026-08-19",
+    "status": "Present"
+  }
+]

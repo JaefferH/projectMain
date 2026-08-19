@@ -1,0 +1,26 @@
+[
+  {
+    "id": "fin_test_1",
+    "type": "Income",
+    "category": "Tuition",
+    "amount": 1500,
+    "date": "2026-08-11",
+    "description": "Test payment"
+  },
+  {
+    "id": "fin_test_1",
+    "type": "Income",
+    "category": "Tuition",
+    "amount": 1500,
+    "date": "2026-08-11",
+    "description": "Test payment"
+  },
+  {
+    "id": "fin_test_1",
+    "type": "Income",
+    "category": "Tuition",
+    "amount": 1500,
+    "date": "2026-08-11",
+    "description": "Test payment"
+  }
+]

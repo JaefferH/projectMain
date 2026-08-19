@@ -1,0 +1,80 @@
+[
+  {
+    "id": "tch_1",
+    "fullName": "Ustaz Ali",
+    "fathersName": "Hassan",
+    "contact": "+251 922 111 222",
+    "nationalId": "T001",
+    "baseSalary": 5000,
+    "assignedCourseIds": [
+      "crs_1",
+      "crs_2"
+    ],
+    "username": "teacher1",
+    "password": "password123",
+    "monthlySalaries": {
+      "September": {
+        "status": "Paid",
+        "method": "Bank Transfer"
+      }
+    }
+  },
+  {
+    "id": "tch_2",
+    "fullName": "Ustadh Jaffer",
+    "fathersName": "Hussein",
+    "contact": "+251 922 333 444",
+    "nationalId": "T002",
+    "baseSalary": 6000,
+    "assignedCourseIds": [
+      "crs_3"
+    ],
+    "username": "teacher2",
+    "password": "password123",
+    "monthlySalaries": {}
+  },
+  {
+    "id": "tch_1786480270091",
+    "fullName": "Ustaz Omar",
+    "contact": "+251911111222"
+  },
+  {
+    "id": "tch_test_1786480974141",
+    "fullName": "Test Teacher",
+    "nationalId": "TCH-99",
+    "baseSalary": 4500,
+    "username": "testteacher",
+    "monthlySalaries": {
+      "September": {
+        "status": "Paid",
+        "method": "Cash"
+      }
+    }
+  },
+  {
+    "id": "tch_test_1786481370551",
+    "fullName": "Test Teacher",
+    "nationalId": "TCH-99",
+    "baseSalary": 4500,
+    "username": "testteacher",
+    "monthlySalaries": {
+      "September": {
+        "status": "Paid",
+        "method": "Cash"
+      }
+    }
+  },
+  {
+    "id": "tch_test_1786821948458",
+    "fullName": "Test Teacher",
+    "nationalId": "TCH-99",
+    "baseSalary": 4500,
+    "username": "testteacher",
+    "monthlySalaries": {
+      "September": {
+        "status": "Paid",
+        "method": "Cash"
+      }
+    }
+  }
+]

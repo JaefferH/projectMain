@@ -1,0 +1,29 @@
+# Local env files (holds database credentials and bot tokens)
+.env
+.env.local
+.env.production
+.env.development.local
+server/.env
+
+# Dependency directories
+node_modules/
+.next/
+out/
+build/
+
+# Vite / React Build output
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+node_modules/
+server/node_modules/
+
+# Prisma
+prisma/dev.db
