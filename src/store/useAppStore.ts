@@ -169,6 +169,11 @@ export const useAppStore = create<AppState>()(
             if (teacher) {
               dataStore.updateTeacher({ ...teacher, password: newPassword });
             }
+          } else if (userRole === 'student') {
+            const student = dataStore.students.find(s => s.id === currentUser.id || s.registrationNumber === currentUser.username);
+            if (student) {
+              dataStore.updateStudent({ ...student, password: newPassword });
+            }
           }
         }
         set({ userPassword: newPassword });

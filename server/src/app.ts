@@ -57,6 +57,11 @@ const defaultTeachers = [
   { id: 'tch_2', fullName: 'Ustadh Jaffer', fathersName: 'Hussein', contact: '+251 922 333 444', nationalId: 'T002', baseSalary: 6000, assignedCourseIds: ['crs_3'], username: 'teacher2', password: 'password123', monthlySalaries: {} }
 ];
 
+const defaultStudents = [
+  { id: 'stu_1', registrationNumber: 'SBI0001', username: 'student1', fullName: 'Bilal Ibrahim', fathersName: 'Ibrahim', gender: 'Male', dob: '2010-05-15', address: 'Addis Ababa', contactPhone: '+251 911 000 111', parentName: 'Ibrahim Ahmed', parentPhone: '+251 911 000 222', enrolledCourseIds: ['crs_1', 'crs_2'], password: 'password123', status: 'Active' },
+  { id: 'stu_2', registrationNumber: 'SBI0002', username: 'student2', fullName: 'Fatima Zohra', fathersName: 'Omar', gender: 'Female', dob: '2011-08-20', address: 'Addis Ababa', contactPhone: '+251 911 333 444', parentName: 'Omar Hassan', parentPhone: '+251 911 333 555', enrolledCourseIds: ['crs_2', 'crs_3'], password: 'password123', status: 'Active' }
+];
+
 app.get(['/api/health', '/api/health/'], async (req, res) => {
   const redisHealthy = await checkRedisHealth();
   res.json({ status: 'ok', timestamp: new Date().toISOString(), uptime: process.uptime(), redis: redisHealthy ? 'connected' : 'disconnected' });
@@ -78,7 +83,7 @@ app.post(loginRoutes, (req, res) => {
 
   const admins = readJson('admins.json', defaultAdmins);
   const teachers = readJson('teachers.json', defaultTeachers);
-  const students = readJson('students.json', []);
+  const students = readJson('students.json', defaultStudents);
 
   // 1. Check Admin Account
   const foundAdmin = admins.find((a: any) => (a.username || '').toLowerCase() === cleanUsername);
@@ -149,18 +154,20 @@ app.post(loginRoutes, (req, res) => {
   // 3. Check Student Account
   const foundStudent = students.find((s: any) => 
     (s.registrationNumber || '').toLowerCase() === cleanUsername || 
+    (s.username || '').toLowerCase() === cleanUsername ||
+    (s.id || '').toLowerCase() === cleanUsername ||
     (s.fullName || '').toLowerCase() === cleanUsername
   );
-  const isStudentUsername = cleanUsername === 'student' || cleanUsername === 'student1' || cleanUsername.startsWith('stu') || !!foundStudent;
+  const isStudentUsername = cleanUsername === 'student' || cleanUsername === 'student1' || cleanUsername === 'sbi0001' || cleanUsername.startsWith('stu') || !!foundStudent;
 
   if (isStudentUsername) {
-    const studentRecord = foundStudent || students[0] || { id: 'stu_1', fullName: 'Bilal Ibrahim', registrationNumber: 'SBI0001', password: 'password123' };
+    const studentRecord = foundStudent || students[0] || defaultStudents[0];
     const expectedPassword = (studentRecord.password || 'password123').trim();
 
     if (cleanPassword === expectedPassword) {
       const user = {
         id: studentRecord.id || 'stu_1',
-        username: studentRecord.registrationNumber || username || 'student1',
+        username: studentRecord.registrationNumber || studentRecord.username || username || 'student1',
         role: 'STUDENT',
         roles: ['STUDENT'],
         name: studentRecord.fullName || 'Bilal Ibrahim',
@@ -370,12 +377,27 @@ app.post('/api/students', (req, res) => {
   res.json(newStudent);
 });
 
-app.put('/api/students/:id', (req, res) => {
-  let students = readJson('students.json', []);
-  const updated = req.body;
-  students = students.map((s: any) => s.id === req.params.id ? { ...s, ...updated } : s);
+app.put(['/api/students/:id', '/api/students/:id/'], (req, res) => {
+  let students = readJson('students.json', defaultStudents);
+  const targetId = req.params.id;
+  const updates = req.body || {};
+
+  let found = false;
+  students = students.map((s: any) => {
+    if (s.id === targetId || (s.registrationNumber || '').toLowerCase() === (updates.registrationNumber || targetId || '').toLowerCase() || (s.username || '').toLowerCase() === (updates.username || targetId || '').toLowerCase() || (s.id === 'stu_1' && (targetId === 'student1' || targetId === 'SBI0001'))) {
+      found = true;
+      return { ...s, ...updates, id: s.id };
+    }
+    return s;
+  });
+
+  if (!found && updates) {
+    students.push({ id: targetId || `stu_${Date.now()}`, ...updates });
+  }
+
   writeJson('students.json', students);
-  res.json(updated);
+  const updatedStudent = students.find((s: any) => s.id === targetId || s.registrationNumber === updates.registrationNumber) || updates;
+  res.json(updatedStudent);
 });
 
 app.delete('/api/students/:id', (req, res) => {
