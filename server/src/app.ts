@@ -56,18 +56,27 @@ app.get(['/api/health', '/api/health/'], async (req, res) => {
 const loginRoutes = ['/api/auth/login', '/api/auth/login/', '/api/users/auth/login', '/api/users/auth/login/'];
 app.post(loginRoutes, (req, res) => {
   const { username, password } = req.body || {};
-  const admins = readJson('admins.json', defaultAdmins);
-  const teachers = readJson('teachers.json', defaultTeachers);
-
   const cleanUsername = (username || '').trim().toLowerCase();
   const cleanPassword = (password || '').trim();
 
-  const foundAdmin = admins.find((a: any) => (a.username || '').toLowerCase() === cleanUsername);
-  const isAdminUser = cleanUsername === 'admin' || cleanUsername === 'mudir' || cleanUsername === 'abuki' || !!foundAdmin;
+  if (!cleanUsername || !cleanPassword) {
+    return res.status(401).json({
+      success: false,
+      message: 'Invalid username or password.'
+    });
+  }
 
-  if (isAdminUser) {
-    const validAdminPass = !cleanPassword || cleanPassword === 'admin123' || cleanPassword === 'newadmin@123' || cleanPassword === 'admin' || cleanPassword === 'ia4c&2@jhnr' || (foundAdmin && foundAdmin.password === password) || (foundAdmin && foundAdmin.password === cleanPassword);
-    if (validAdminPass) {
+  const admins = readJson('admins.json', defaultAdmins);
+  const teachers = readJson('teachers.json', defaultTeachers);
+  const students = readJson('students.json', []);
+
+  // 1. Check Admin Account
+  const foundAdmin = admins.find((a: any) => (a.username || '').toLowerCase() === cleanUsername);
+  const isAdminUsername = cleanUsername === 'admin' || cleanUsername === 'mudir' || cleanUsername === 'abuki' || !!foundAdmin;
+
+  if (isAdminUsername) {
+    const isPassCorrect = cleanPassword === 'admin123' || cleanPassword === 'newadmin@123' || cleanPassword === 'admin' || cleanPassword === 'ia4c&2@jhnr' || (foundAdmin && (foundAdmin.password === password || foundAdmin.password === cleanPassword));
+    if (isPassCorrect) {
       const user = {
         id: foundAdmin?.id || 'admin_1',
         username: foundAdmin?.username || username || 'admin',
@@ -82,21 +91,23 @@ app.post(loginRoutes, (req, res) => {
         accessToken: 'mock-access-token-12345',
         refreshToken: 'mock-refresh-token-12345',
         user,
-        data: {
-          accessToken: 'mock-access-token-12345',
-          refreshToken: 'mock-refresh-token-12345',
-          user
-        }
+        data: { accessToken: 'mock-access-token-12345', refreshToken: 'mock-refresh-token-12345', user }
+      });
+    } else {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid username or password.'
       });
     }
   }
 
+  // 2. Check Teacher Account
   const foundTeacher = teachers.find((t: any) => (t.username || '').toLowerCase() === cleanUsername);
-  const isTeacherUser = cleanUsername === 'teacher1' || cleanUsername === 'teacher2' || cleanUsername.startsWith('teacher') || !!foundTeacher;
+  const isTeacherUsername = cleanUsername === 'teacher1' || cleanUsername === 'teacher2' || cleanUsername.startsWith('teacher') || !!foundTeacher;
 
-  if (isTeacherUser) {
-    const validTeacherPass = !cleanPassword || cleanPassword === 'password123' || cleanPassword === 'teacher' || (foundTeacher && foundTeacher.password === password) || (foundTeacher && foundTeacher.password === cleanPassword);
-    if (validTeacherPass) {
+  if (isTeacherUsername) {
+    const isPassCorrect = cleanPassword === 'password123' || cleanPassword === 'teacher' || (foundTeacher && (foundTeacher.password === password || foundTeacher.password === cleanPassword));
+    if (isPassCorrect) {
       const user = {
         id: foundTeacher?.id || (cleanUsername === 'teacher2' ? 'tch_2' : 'tch_1'),
         username: foundTeacher?.username || username || 'teacher1',
@@ -111,25 +122,26 @@ app.post(loginRoutes, (req, res) => {
         accessToken: 'mock-access-token-12345',
         refreshToken: 'mock-refresh-token-12345',
         user,
-        data: {
-          accessToken: 'mock-access-token-12345',
-          refreshToken: 'mock-refresh-token-12345',
-          user
-        }
+        data: { accessToken: 'mock-access-token-12345', refreshToken: 'mock-refresh-token-12345', user }
+      });
+    } else {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid username or password.'
       });
     }
   }
 
-  const students = readJson('students.json', []);
+  // 3. Check Student Account
   const foundStudent = students.find((s: any) => 
     (s.registrationNumber || '').toLowerCase() === cleanUsername || 
-    (s.fullName || '').toLowerCase().includes(cleanUsername)
+    (s.fullName || '').toLowerCase() === cleanUsername
   );
-  const isStudentUser = cleanUsername === 'student' || cleanUsername === 'student1' || cleanUsername.startsWith('stu') || !!foundStudent;
+  const isStudentUsername = cleanUsername === 'student' || cleanUsername === 'student1' || cleanUsername.startsWith('stu') || !!foundStudent;
 
-  if (isStudentUser) {
-    const validStudentPass = !cleanPassword || cleanPassword === 'password123' || cleanPassword === 'student' || (foundStudent && foundStudent.password === password);
-    if (validStudentPass) {
+  if (isStudentUsername) {
+    const isPassCorrect = cleanPassword === 'password123' || cleanPassword === 'student' || (foundStudent && (foundStudent.password === password || foundStudent.password === cleanPassword));
+    if (isPassCorrect) {
       const user = {
         id: foundStudent?.id || 'stu_1',
         username: foundStudent?.registrationNumber || username || 'student1',
@@ -144,16 +156,21 @@ app.post(loginRoutes, (req, res) => {
         accessToken: 'mock-access-token-12345',
         refreshToken: 'mock-refresh-token-12345',
         user,
-        data: {
-          accessToken: 'mock-access-token-12345',
-          refreshToken: 'mock-refresh-token-12345',
-          user
-        }
+        data: { accessToken: 'mock-access-token-12345', refreshToken: 'mock-refresh-token-12345', user }
+      });
+    } else {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid username or password.'
       });
     }
   }
 
-  return res.status(401).json({ success: false, message: 'Invalid username or password', error: 'Invalid username or password' });
+  // 4. Default Invalid Credentials
+  return res.status(401).json({
+    success: false,
+    message: 'Invalid username or password.'
+  });
 });
 
 // Refresh & Logout Tokens (Postman Collection)
