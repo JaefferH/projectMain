@@ -255,6 +255,16 @@ h2, h3, h4, .section-title, .green-title {
   color: #ecfdf5 !important;
 }
 
+/* Preserve bright badge text on dark containers in Day and Night modes */
+.text-\[\#fef08a\], .text-\[\#fbbf24\], .gold-badge {
+  color: #fef08a !important;
+}
+
+html:not(.dark) .bg-\[\#021f17\] span,
+html:not(.dark) .bg-\[\#042f22\] span {
+  color: #fef08a !important;
+}
+
 /* ── COMPREHENSIVE DAY MODE CONTRAST OVERRIDES FOR ENTIRE SYSTEM ── */
 html:not(.dark) td,
 html:not(.dark) th,
