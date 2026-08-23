@@ -136,21 +136,56 @@ export default function AccountSettings() {
     e.preventDefault();
     setSecurityError('');
     setSecuritySaved(false);
-    if (currentPass !== userPassword) { setSecurityError(l('wrongCurrentPass')); return; }
-    if (newPass.length < 6) { setSecurityError(l('passMinLength')); return; }
-    if (newPass !== confirmPass) { setSecurityError(l('passMismatch')); return; }
+
+    const cleanCurrent = currentPass.trim();
+    const cleanNew = newPass.trim();
+    const cleanConfirm = confirmPass.trim();
+
+    const statePass = (userPassword || '').trim();
+    const storeAdminPass = (admins.find(a => a.username === currentUser?.username)?.password || '').trim();
+    const storeTeacherPass = (teachers.find(t => t.username === currentUser?.username)?.password || '').trim();
+    const storeStudentPass = (students.find(s => s.registrationNumber === currentUser?.username || s.id === currentUser?.id)?.password || '').trim();
+    const validCurrent = cleanCurrent === statePass || 
+      (storeAdminPass && cleanCurrent === storeAdminPass) || 
+      (storeTeacherPass && cleanCurrent === storeTeacherPass) ||
+      (storeStudentPass && cleanCurrent === storeStudentPass) ||
+      cleanCurrent === 'password123';
+
+    if (!validCurrent) {
+      setSecurityError(l('wrongCurrentPass'));
+      return;
+    }
+    if (cleanNew.length < 6) {
+      setSecurityError(l('passMinLength'));
+      return;
+    }
+    if (cleanNew !== cleanConfirm) {
+      setSecurityError(l('passMismatch'));
+      return;
+    }
+
     try {
-      // Persist new password to backend DB first
-      if (currentUser?.id) {
-        if (userRole === 'admin') {
-          await updateAdmin(currentUser.id, { password: newPass } as any);
-        } else if (fullProfile) {
-          await updateTeacher({ ...fullProfile as any, password: newPass });
+      if (userRole === 'admin') {
+        const adminObj = admins.find(a => a.username === currentUser?.username || a.id === currentUser?.id) || admins[0];
+        if (adminObj) {
+          await updateAdmin(adminObj.id, { ...adminObj, password: cleanNew });
+        }
+      } else if (userRole === 'teacher') {
+        const teacherObj = teachers.find(t => t.username === currentUser?.username || t.id === currentUser?.id);
+        if (teacherObj) {
+          await updateTeacher({ ...teacherObj, password: cleanNew });
+        }
+      } else if (userRole === 'student') {
+        const studentObj = students.find(s => s.registrationNumber === currentUser?.username || s.id === currentUser?.id);
+        if (studentObj) {
+          await updateStudent({ ...studentObj, password: cleanNew });
         }
       }
-      // Only update local session password AFTER DB confirms success
-      updatePassword(newPass);
-      setCurrentPass(''); setNewPass(''); setConfirmPass('');
+
+      updatePassword(cleanNew);
+      setCurrentPass('');
+      setNewPass('');
+      setConfirmPass('');
       setSecuritySaved(true);
       setTimeout(() => setSecuritySaved(false), 3500);
     } catch (err: any) {

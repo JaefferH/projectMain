@@ -29,9 +29,8 @@ export default function Authentication() {
       const API_URL = import.meta.env.VITE_API_URL || '/api';
       const res = await axios.post(`${API_URL}/auth/forgot-password`, {
         username,
-        targetEmail: 'jafferhussein@gmail.com'
       });
-      setResetMessage(res.data.message || 'Password sent to jafferhussein@gmail.com');
+      setResetMessage(res.data.message || 'Password recovery instructions have been sent to the registered administrator email.');
     } catch (err: any) {
       setError(err?.response?.data?.error || 'Failed to send password recovery email. Check .env config.');
     } finally {

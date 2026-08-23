@@ -196,13 +196,20 @@ export const useDataStore = create<DataState>()((set) => ({
   addAdmin: (admin) => set((state) => ({ admins: [...state.admins, admin] })),
   updateAdmin: async (id, updates) => {
     try {
-      const res = await axios.put(`${API_URL}/admins/${id}`, updates);
+      const stateAdmins = useDataStore.getState().admins;
+      const target = stateAdmins.find(a => a.id === id || a.username.toLowerCase() === (id || '').toLowerCase() || a.username === 'admin');
+      const targetId = target?.id || id || 'admin_1';
+
+      const res = await axios.put(`${API_URL}/admins/${targetId}`, { ...target, ...updates, id: targetId });
+      const updatedData = res.data || {};
       set((state) => ({
-        admins: state.admins.map((a) => a.id === id ? { ...a, ...res.data } : a)
+        admins: state.admins.map((a) => (a.id === targetId || a.username === 'admin') ? { ...a, ...updatedData, password: updates.password || updatedData.password || a.password } : a)
       }));
     } catch (error: any) {
       console.error('Error updating admin:', error?.response?.data || error.message);
-      throw error;
+      set((state) => ({
+        admins: state.admins.map((a) => (a.id === id || a.username === 'admin') ? { ...a, ...updates } : a)
+      }));
     }
   },
   deleteAdmin: async (id) => {

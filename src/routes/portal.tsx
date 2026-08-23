@@ -34,14 +34,31 @@ function Portal() {
     setError("");
     setLoading(true);
 
+    const cleanUser = staffId.trim();
+    const cleanPass = password.trim();
+
+    if (!cleanUser || !cleanPass) {
+      setError("Please enter both Staff ID / Username and Password.");
+      setLoading(false);
+      return;
+    }
+
+    let backendResponded = false;
+
     try {
-      // 1. Try Backend API server
+      // 1. Try Backend API server with 2.5s timeout controller
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
+
       const API_URL = "http://localhost:5000/api";
       const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: staffId, password }),
+        body: JSON.stringify({ username: cleanUser, password: cleanPass }),
+        signal: controller.signal,
       });
+      clearTimeout(timeoutId);
+      backendResponded = true;
 
       if (response.ok) {
         const data = await response.json();
@@ -63,15 +80,24 @@ function Portal() {
         });
         setLoading(false);
         return;
+      } else {
+        setError("Invalid Staff ID or Password.");
+        setLoading(false);
+        return;
       }
     } catch (err) {
-      console.warn("Backend server login offline, attempting local login fallback...", err);
+      if (backendResponded) {
+        setError("Invalid Staff ID or Password.");
+        setLoading(false);
+        return;
+      }
+      console.warn("Backend server login offline/timeout, attempting local login fallback...", err);
     }
 
-    // 2. Local App Store Login Fallback (always works!)
-    const localSuccess = useAppStore.getState().login(staffId, password);
+    // 2. Local App Store Login Fallback (Instant!)
+    const localSuccess = useAppStore.getState().login(cleanUser, cleanPass);
     if (!localSuccess) {
-      setError("Invalid Staff ID or Password. Try logging in as 'admin' or 'teacher1'.");
+      setError("Invalid Staff ID or Password.");
     }
     setLoading(false);
   };

@@ -270,13 +270,10 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             </motion.div>
           </div>
 
-          {/* Signature Footer */}
-          <footer className="mt-10 pb-4 text-center opacity-25 hover:opacity-75 transition-opacity">
-            <p className="text-white/60 text-[10px] tracking-wider">
-              <span className="font-medium">Jaeffer Hussein</span> ·{' '}
-              <a href="mailto:Jaefferhussein@gmail.com" className="hover:underline">
-                Jaefferhussein@gmail.com
-              </a>
+          {/* Portal Footer */}
+          <footer className="mt-10 pb-4 text-center opacity-30">
+            <p className="text-white/60 text-[10px] tracking-wider font-semibold">
+              Al Imam Hassan Mosque &amp; Madrasah • System Portal
             </p>
           </footer>
         </main>

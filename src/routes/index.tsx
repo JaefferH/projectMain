@@ -69,9 +69,9 @@ function Home() {
 
               {/* Sub-Crest Badge */}
               <div className="pt-1">
-                <span className="inline-flex items-center gap-2 px-4.5 py-2 rounded-full bg-[#042f22]/90 border border-[#6ee7b7]/60 text-[#6ee7b7] text-xs sm:text-sm font-extrabold uppercase tracking-[0.22em] shadow-[0_0_20px_rgba(110,231,183,0.35)] backdrop-blur-md">
-                  <Sparkles className="h-4 w-4 text-[#6ee7b7] animate-pulse" />
-                  Mosque &amp; Madrasah • መስጂድ እና መድረሳ
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#021f17] border-2 border-[#fbbf24] text-[#fef08a] text-xs sm:text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_25px_rgba(251,191,36,0.6)] backdrop-blur-md font-arabic">
+                  <Sparkles className="h-4 w-4 text-[#fbbf24] shrink-0 animate-pulse" />
+                  <span className="text-[#fef08a] font-black">Mosque &amp; Madrasah • መስጂድ እና መድረሳ</span>
                 </span>
               </div>
             </div>
