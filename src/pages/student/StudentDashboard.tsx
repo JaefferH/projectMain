@@ -1,12 +1,18 @@
 import { useDataStore } from '../../store/useDataStore';
 import { useAppStore } from '../../store/useAppStore';
-import { BookOpen, GraduationCap, DollarSign, ShieldCheck, Bell, MessageSquare, Phone, MapPin, Award } from 'lucide-react';
+import { BookOpen, GraduationCap, DollarSign, ShieldCheck, Bell, MessageSquare, Phone, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { IslamicQuoteBanner } from '../../components/ArabicDecoration';
 
+const defaultAnnouncements = [
+  { id: 'anc_1', title: 'Parent-Teacher Conference', category: 'Academic', content: 'Term assessment review meeting scheduled this Friday after Asr prayer.', date: '2026-09-05' },
+  { id: 'anc_2', title: 'Quran Hifz Recitation Contest', category: 'Events', content: 'Annual Tajweed and Hifz recitation competition for all registered students.', date: '2026-09-12' }
+];
+
 export default function StudentDashboard() {
   const { currentUser } = useAppStore();
-  const { students, courses, announcements } = useDataStore();
+  const { students, courses } = useDataStore();
+  const announcements = defaultAnnouncements;
 
   const student = students.find(s => s.id === currentUser?.id || s.registrationNumber === currentUser?.username || s.fullName.toLowerCase() === currentUser?.name?.toLowerCase());
   const myCourses = courses.filter(c => student?.enrolledCourseIds.includes(c.id));

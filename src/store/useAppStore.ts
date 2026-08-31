@@ -6,6 +6,10 @@ export type Language = 'en' | 'am' | 'ar';
 export type Screen = 
   | 'landing' 
   | 'auth' 
+  | 'about'
+  | 'programs'
+  | 'contact'
+  | 'faq'
   | 'admin_dashboard' 
   | 'admin_students' 
   | 'admin_tuition' 
@@ -24,6 +28,11 @@ export type Screen =
   | 'teacher_gradebook'
   | 'teacher_schedule'
   | 'teacher_salary'
+  | 'student_dashboard'
+  | 'student_grades'
+  | 'student_attendance'
+  | 'student_timetable'
+  | 'student_fees'
   | 'account_settings';
 
 export type Role = 'admin' | 'teacher' | 'student' | null;

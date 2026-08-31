@@ -6,9 +6,9 @@ import {
 import { useI18n, languages, nextLang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
-export const Route = createFileRoute("/teacher")({
+export const Route = createFileRoute("/teacher" as any)({
   head: () => ({
     meta: [
       { title: "Teacher Portal — Al Imam Hassan Mosque & Madereesa" },

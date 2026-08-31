@@ -37,7 +37,7 @@ const PasswordInput = ({
 
 export default function AccountSettings() {
   const { currentUser, userRole, userPassword, currentLanguage, rtlMode, updateUserProfile, updatePassword } = useAppStore();
-  const { admins, teachers, updateAdmin, updateTeacher } = useDataStore();
+  const { admins, teachers, students, updateAdmin, updateTeacher, updateStudent } = useDataStore();
 
   const [activeTab, setActiveTab] = useState<Tab>('profile');
 

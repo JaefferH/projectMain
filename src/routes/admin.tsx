@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { 
-  Users, GraduationCap, DollarSign, BookOpen, Send, LogOut, Plus, Search, 
-  CheckCircle, AlertCircle, TrendingUp, TrendingDown, RefreshCw, Lock
+  Users, GraduationCap, DollarSign, Send, LogOut, Plus, 
+  TrendingUp, TrendingDown, RefreshCw
 } from "lucide-react";
 import { useI18n, languages, nextLang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/admin" as any)({
   head: () => ({
     meta: [
       { title: "Admin Portal — Al Imam Hassan Mosque & Madereesa" },

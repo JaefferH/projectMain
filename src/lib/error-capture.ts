@@ -19,7 +19,7 @@ export function describeError(error: unknown): string {
     const label = depth === 0 ? "" : "caused by: ";
     const status = describeStatus(current);
     parts.push(`${label}${current.stack ?? `${current.name}: ${current.message}`}${status}`);
-    current = current.cause;
+    current = (current as any).cause;
   }
   return parts.join("\n").slice(0, DESCRIPTION_LENGTH_LIMIT);
 }

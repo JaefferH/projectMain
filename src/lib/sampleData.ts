@@ -18,6 +18,7 @@ export interface Student {
   telegramChatId?: string;
   totalFee: number;
   amountPaid: number;
+  password?: string;
   monthlyFees?: Record<string, { status: 'Paid' | 'Unpaid', method?: 'Cash' | 'Bank Transfer' }>; // e.g. { 'September': { status: 'Paid', method: 'Cash' } }
 }
 
@@ -52,6 +53,7 @@ export interface Course {
   teacherId?: string;
   classroom: string;
   term: string; // e.g. 'Summer 2026', 'Winter 2026'
+  description?: string;
 }
 
 export interface Payment {

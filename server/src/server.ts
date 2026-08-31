@@ -1,6 +1,6 @@
 import { errorMiddleware } from "@middleware/error.middleware";
 import { logger } from "@shared/logger/logger";
-import app from "app";
+import app from "./app";
 import { env } from "@config/env";
 import authRoutes from "@modules/auth/auth.routes";
 import userRoutes from "@modules/user/user.routes";

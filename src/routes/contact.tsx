@@ -1,4 +1,4 @@
-import { Building2, Clock, MapPin, Navigation, UserPlus, PhoneCall } from "lucide-react";
+import { Building2, Clock, MapPin, Navigation, PhoneCall } from "lucide-react";
 import { PageHeader, PageShell } from "@/components/page-shell";
 import { useI18n } from "@/lib/i18n";
 
