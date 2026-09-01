@@ -135,12 +135,16 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-background px-4 py-3 lg:hidden">
+        <nav className="border-t border-emerald-200 dark:border-border bg-white dark:bg-[#021a12] px-4 py-4 lg:hidden shadow-xl space-y-1.5 animate-in fade-in slide-in-from-top-2 duration-200">
           {links.map((l) => (
             <button
               key={l.screen}
               onClick={() => { setOpen(false); setScreen(l.screen as any); }}
-              className="block w-full text-start rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              className={`block w-full text-start rounded-xl px-4 py-3 text-sm font-extrabold transition-all cursor-pointer ${
+                currentScreen === l.screen
+                  ? "bg-emerald-100 text-[#047857] dark:bg-[#6ee7b7]/20 dark:text-[#6ee7b7] border border-emerald-300 dark:border-[#6ee7b7]/30"
+                  : "text-[#042c22] dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
+              }`}
             >
               {t(l.key)}
             </button>
@@ -148,9 +152,9 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => { setOpen(false); setScreen('auth'); }}
-            className="mt-2 w-full rounded-md bg-primary px-3 py-2.5 text-center text-sm font-semibold text-primary-foreground"
+            className="mt-3 w-full rounded-xl bg-gradient-to-r from-[#10b981] to-[#047857] px-4 py-3.5 text-center text-sm font-black text-white shadow-lg cursor-pointer hover:brightness-105 active:scale-95 transition-all"
           >
-            {t("nav.portal")}
+            {t("nav.portal")} &rarr;
           </button>
         </nav>
       )}
