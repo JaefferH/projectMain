@@ -32,8 +32,8 @@ export function Faq() {
           <div className="space-y-10">
             {groups.map((g) => (
               <div key={g.key}>
-                <h2 className="flex items-center gap-2 font-display text-lg font-bold">
-                  <g.icon className="h-4.5 w-4.5 text-primary" />
+                <h2 className="flex items-center gap-2 font-display text-lg font-extrabold text-[#042c22] dark:text-[#6ee7b7]">
+                  <g.icon className="h-5 w-5 text-[#059669] dark:text-[#34d399]" />
                   {t(g.key)}
                 </h2>
                 <div className="mt-4 space-y-3">
@@ -55,7 +55,7 @@ export function Faq() {
                           />
                         </button>
                         {isOpen && (
-                          <p className="border-t border-emerald-200 dark:border-[#34d399]/30 px-5 py-4 text-sm font-medium leading-relaxed text-[#047857] dark:text-emerald-100/90 bg-emerald-50/50 dark:bg-emerald-950/40">
+                          <p className="border-t border-emerald-200 dark:border-[#34d399]/30 px-5 py-4 text-sm font-medium leading-relaxed text-[#064e3b] dark:text-emerald-100/90 bg-emerald-50/50 dark:bg-emerald-950/40">
                             {t(`faq.a${n}`)}
                           </p>
                         )}
@@ -67,24 +67,25 @@ export function Faq() {
             ))}
           </div>
 
-          <aside className="card-surface h-fit p-6 lg:sticky lg:top-24">
-            <HelpCircle className="h-6 w-6 text-primary" />
-            <h2 className="mt-3 font-display text-xl font-bold">{t("faq.stillT")}</h2>
-            <p className="mt-2 text-sm text-muted-foreground">{t("faq.stillB")}</p>
+          <aside className="rounded-2xl bg-white dark:bg-card border border-emerald-200 dark:border-border p-6 shadow-md lg:sticky lg:top-24 h-fit">
+            <HelpCircle className="h-7 w-7 text-[#059669] dark:text-[#34d399]" />
+            <h2 className="mt-3 font-display text-xl font-extrabold text-[#042c22] dark:text-white">{t("faq.stillT")}</h2>
+            <p className="mt-2 text-sm font-medium text-[#064e3b] dark:text-emerald-100/80 leading-relaxed">{t("faq.stillB")}</p>
             <a
               href="#contact"
-              className="mt-5 inline-flex rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#10b981] to-[#047857] text-white px-5 py-3 text-xs font-black shadow-md hover:scale-105 transition-all cursor-pointer"
             >
-              {t("nav.contact")}
+              <span>{t("contact.title")}</span>
+              <span>&rarr;</span>
             </a>
-            <ul className="mt-6 space-y-2 border-t border-border pt-5 text-sm">
+            <ul className="mt-6 space-y-2 border-t border-emerald-100 dark:border-border pt-5 text-sm">
               <li>
-                <a href="#programs" className="text-foreground/80 hover:text-primary">
+                <a href="#programs" className="text-[#042c22] dark:text-slate-200 hover:text-[#059669] dark:hover:text-[#6ee7b7] font-semibold">
                   {t("nav.programs")}
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-foreground/80 hover:text-primary">
+                <a href="#about" className="text-[#042c22] dark:text-slate-200 hover:text-[#059669] dark:hover:text-[#6ee7b7] font-semibold">
                   {t("nav.about")}
                 </a>
               </li>
@@ -94,23 +95,23 @@ export function Faq() {
       </section>
 
       <section id="contact" className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#047857] via-[#059669] to-[#10b981] p-8 sm:p-12 border border-[#34d399]/40 shadow-[0_12px_40px_rgba(16,185,129,0.3)]">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#047857] via-[#059669] to-[#047857] p-8 sm:p-12 border border-[#34d399]/40 shadow-[0_12px_40px_rgba(16,185,129,0.3)] text-white">
           <div className="pattern-grid pointer-events-none absolute inset-0 text-white/10" />
           <div className="relative z-10 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div>
-              <span className="inline-block px-3 py-1 rounded-full bg-[#6ee7b7]/20 text-[#6ee7b7] text-xs font-bold uppercase tracking-widest mb-3 border border-[#6ee7b7]/30">
+              <span className="inline-block px-3.5 py-1 rounded-full bg-white/20 text-white text-xs font-bold uppercase tracking-widest mb-3 border border-white/30 shadow-sm">
                 Madrasah Campus Visit
               </span>
-              <h2 className="font-display text-2xl font-extrabold text-[#6ee7b7] sm:text-3xl tracking-wide drop-shadow-sm">
+              <h2 className="font-display text-2xl font-extrabold text-white sm:text-3xl tracking-wide drop-shadow-sm">
                 {t("cta.title")}
               </h2>
-              <p className="mt-2 max-w-xl text-sm sm:text-base text-emerald-100/90 font-medium leading-relaxed">
+              <p className="mt-2 max-w-xl text-sm sm:text-base text-emerald-50 font-medium leading-relaxed drop-shadow-sm">
                 {t("cta.sub")}
               </p>
             </div>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-[#6ee7b7] hover:bg-[#a7f3d0] text-[#021a12] px-7 py-3.5 text-sm font-extrabold shadow-lg transition-all hover:scale-105 cursor-pointer shrink-0"
+              className="inline-flex items-center gap-2 rounded-xl bg-white hover:bg-emerald-50 text-[#042c22] px-7 py-3.5 text-sm font-black shadow-lg transition-all hover:scale-105 cursor-pointer shrink-0"
             >
               <span>{t("hero.cta1")}</span>
               <span className="text-base">&rarr;</span>

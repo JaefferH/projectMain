@@ -8,18 +8,22 @@
   --radius: 1rem;
   --background: #f4fbf7;
   --foreground: #042c22;
-  --card: rgba(255, 255, 255, 0.92);
+  --card: #ffffff;
   --card-foreground: #042c22;
   --primary: #059669;
   --primary-foreground: #ffffff;
   --secondary: #ecfdf5;
   --secondary-foreground: #047857;
-  --gold: #10b981;
-  --gold-glow: rgba(16, 185, 129, 0.25);
-  --border: rgba(5, 150, 105, 0.25);
+  --muted: #e2f4eb;
+  --muted-foreground: #065f46;
+  --accent: #d1fae5;
+  --accent-foreground: #042c22;
+  --gold: #b45309;
+  --gold-glow: rgba(180, 83, 9, 0.15);
+  --border: rgba(5, 150, 105, 0.22);
   --input: rgba(5, 150, 105, 0.3);
-  --glass-bg: rgba(244, 251, 247, 0.88);
-  --glass-border: rgba(5, 150, 105, 0.25);
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-border: rgba(5, 150, 105, 0.22);
 }
 
 html.dark, body.dark, .dark {
@@ -31,6 +35,10 @@ html.dark, body.dark, .dark {
   --primary-foreground: #021a12;
   --secondary: #064e3b;
   --secondary-foreground: #6ee7b7;
+  --muted: #042f22;
+  --muted-foreground: #6ee7b7;
+  --accent: #064e3b;
+  --accent-foreground: #f8fafc;
   --gold: #34d399;
   --gold-glow: rgba(52, 211, 153, 0.3);
   --border: rgba(16, 185, 129, 0.3);
@@ -62,14 +70,14 @@ html.dark, body.dark, .dark {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   border-radius: 1.25rem;
   color: var(--foreground);
 }
 
 .glass-card:hover {
   border-color: var(--primary);
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18), 0 0 20px var(--gold-glow);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12), 0 0 20px var(--gold-glow);
 }
 
 .glass-navbar {
@@ -87,8 +95,6 @@ html.dark, body.dark, .dark {
   border-right: 1px solid var(--border);
   color: var(--foreground);
 }
-
-
 
 /* Enhanced Luxury Button System */
 .btn-gold {
@@ -134,9 +140,9 @@ html.dark, body.dark, .dark {
 }
 
 .btn-glass {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.12);
+  color: inherit;
+  border: 1px solid rgba(5, 150, 105, 0.25);
   border-radius: 0.75rem;
   font-weight: 600;
   transition: all 0.25s ease;
@@ -144,8 +150,8 @@ html.dark, body.dark, .dark {
 }
 
 .btn-glass:hover {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(255, 255, 255, 0.25);
+  border-color: var(--primary);
   transform: translateY(-1px);
 }
 
@@ -154,24 +160,40 @@ html.dark, body.dark, .dark {
 }
 
 .gold-badge {
-  background: rgba(16, 185, 129, 0.18);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background: rgba(180, 83, 9, 0.12);
+  color: #92400e;
+  border: 1px solid rgba(180, 83, 9, 0.3);
   font-weight: 700;
 }
 
+.dark .gold-badge {
+  background: rgba(251, 191, 36, 0.18);
+  color: #fef08a;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+}
+
 .emerald-badge {
-  background: rgba(16, 185, 129, 0.18);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.35);
   font-weight: 700;
+}
+
+.dark .emerald-badge {
+  background: rgba(16, 185, 129, 0.22);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.45);
 }
 
 .hifz-progress-bar {
   height: 6px;
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.08);
   overflow: hidden;
+}
+
+.dark .hifz-progress-bar {
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .hifz-progress-fill {
@@ -188,192 +210,81 @@ html.dark, body.dark, .dark {
 }
 
 ::-webkit-scrollbar-track {
+  background: rgba(4, 47, 34, 0.1);
+}
+
+.dark ::-webkit-scrollbar-track {
   background: rgba(4, 47, 34, 0.6);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(16, 185, 129, 0.5);
+  background: rgba(5, 150, 105, 0.4);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: rgba(5, 150, 105, 0.7);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(52, 211, 153, 0.8);
 }
 
-/* Universal High-Contrast Green Text System for Ultimate Readability */
-:root {
-  --muted-foreground: #047857;
+/* ── Typography and Heading Contrast System ── */
+.portal-title, .gold-title {
+  color: #042c22;
+  font-weight: 800;
 }
 
-html.dark, body.dark, .dark {
-  --muted-foreground: #34d399;
-}
-
-/* Sub-text and muted labels in Day & Night Mode */
-.text-muted-foreground, .text-slate-400, .text-gray-400, .text-slate-500, .text-gray-500 {
-  color: #047857 !important;
-  font-weight: 600 !important;
-}
-
-/* ── Portal Title Styling System ── */
-/* Portal Main Page Titles (h1 and main page headers) -> Rich Gold Color */
-h1, .portal-title, .gold-title {
-  color: #d4af37 !important;
-  font-weight: 800 !important;
-  text-shadow: 0 2px 12px rgba(212, 175, 55, 0.4);
-}
-
-.dark h1, .dark .portal-title, .dark .gold-title {
-  color: #fbbf24 !important;
+.dark .portal-title, .dark .gold-title {
+  color: #fbbf24;
   text-shadow: 0 0 15px rgba(251, 191, 36, 0.5);
 }
 
-/* Other Sub-Titles & Card Headings (h2, h3, h4) -> Vibrant Green Color like 'Welcome, Ustaz Ali' */
-h2, h3, h4, .section-title, .green-title {
-  color: #047857 !important;
-  font-weight: 700 !important;
+.section-title, .green-title {
+  color: #042c22;
+  font-weight: 700;
 }
 
-.dark h2, .dark h3, .dark h4, .dark .section-title, .dark .green-title {
-  color: #6ee7b7 !important;
-  font-weight: 700 !important;
+.dark .section-title, .dark .green-title {
+  color: #6ee7b7;
   text-shadow: 0 0 12px rgba(110, 231, 183, 0.35);
 }
 
-/* Sub-text and muted labels in Day & Night Mode */
-.text-muted-foreground, .text-slate-400, .text-gray-400, .text-slate-500, .text-gray-500 {
-  color: #047857 !important;
-  font-weight: 600 !important;
-}
-
-.dark .text-muted-foreground, .dark .text-slate-400, .dark .text-gray-400, .dark .text-slate-300, .dark .text-gray-300 {
-  color: #34d399 !important;
-  font-weight: 600 !important;
-}
-
-.dark .text-slate-100, .dark .text-slate-200 {
-  color: #ecfdf5 !important;
-}
-
-/* Preserve bright badge text on dark containers in Day and Night modes */
-.text-\[\#fef08a\], .text-\[\#fbbf24\], .gold-badge {
-  color: #fef08a !important;
-}
-
-html:not(.dark) .bg-\[\#021f17\] span,
-html:not(.dark) .bg-\[\#042f22\] span {
-  color: #fef08a !important;
-}
-
-/* ── COMPREHENSIVE DAY MODE CONTRAST OVERRIDES FOR ENTIRE SYSTEM ── */
-html:not(.dark) td,
-html:not(.dark) th,
-html:not(.dark) p,
-html:not(.dark) span,
-html:not(.dark) label,
-html:not(.dark) input,
-html:not(.dark) select,
-html:not(.dark) textarea,
-html:not(.dark) button,
-html:not(.dark) .text-white,
-html:not(.dark) .text-white\/90,
-html:not(.dark) .text-white\/80,
-html:not(.dark) .text-white\/70,
-html:not(.dark) .text-white\/60,
-html:not(.dark) .text-white\/50,
-html:not(.dark) .text-white\/40,
-html:not(.dark) .text-white\/30,
-html:not(.dark) .text-white\/20,
-html:not(.dark) .text-emerald-100,
-html:not(.dark) .text-emerald-100\/90,
-html:not(.dark) .text-emerald-100\/80,
-html:not(.dark) .text-emerald-100\/70,
-html:not(.dark) .text-slate-100,
-html:not(.dark) .text-slate-200,
-html:not(.dark) .text-slate-300,
-html:not(.dark) .text-slate-400 {
+/* Table Text Clarity */
+html:not(.dark) td {
   color: #042c22;
 }
 
-/* Ensure headings in Day Mode use rich dark green */
-html:not(.dark) h2,
-html:not(.dark) h3,
-html:not(.dark) h4,
-html:not(.dark) h5,
-html:not(.dark) h6 {
-  color: #047857 !important;
-  font-weight: 800 !important;
+html:not(.dark) th {
+  color: #047857;
+  font-weight: 700;
 }
 
-/* Day mode inputs, selects, textareas */
+html.dark td {
+  color: #ecfdf5;
+}
+
+html.dark th {
+  color: #fef08a;
+  font-weight: 800;
+}
+
+/* Input Fields in Day Mode */
 html:not(.dark) input,
 html:not(.dark) select,
 html:not(.dark) textarea {
-  background-color: #ffffff !important;
-  color: #042c22 !important;
-  border-color: rgba(5, 150, 105, 0.35) !important;
+  background-color: #ffffff;
+  color: #042c22;
+  border-color: rgba(5, 150, 105, 0.3);
 }
 
 html:not(.dark) input::placeholder,
 html:not(.dark) textarea::placeholder {
-  color: #047857 !important;
-  opacity: 0.7 !important;
-}
-
-/* Day mode dark background utilities override */
-html:not(.dark) .bg-black\/40,
-html:not(.dark) .bg-black\/30,
-html:not(.dark) .bg-black\/20,
-html:not(.dark) .bg-black\/10,
-html:not(.dark) .bg-white\/5,
-html:not(.dark) .bg-white\/10 {
-  background-color: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(5, 150, 105, 0.25) !important;
-}
-
-/* Day mode table row hover */
-html:not(.dark) tr:hover {
-  background-color: rgba(16, 185, 129, 0.12) !important;
-}
-
-/* Day mode badge text colors */
-html:not(.dark) .bg-emerald-500\/10,
-html:not(.dark) .bg-emerald-400\/15,
-html:not(.dark) .bg-emerald-500\/20 {
-  background-color: rgba(209, 250, 229, 0.9) !important;
-  color: #047857 !important;
-  border-color: rgba(5, 150, 105, 0.35) !important;
-}
-
-html:not(.dark) .bg-amber-500\/10,
-html:not(.dark) .bg-amber-400\/15,
-html:not(.dark) .bg-amber-500\/20 {
-  background-color: rgba(254, 243, 199, 0.9) !important;
-  color: #92400e !important;
-  border-color: rgba(217, 119, 6, 0.35) !important;
-}
-
-html:not(.dark) .bg-red-500\/10,
-html:not(.dark) .bg-red-400\/15,
-html:not(.dark) .bg-red-500\/20 {
-  background-color: rgba(254, 226, 226, 0.9) !important;
-  color: #991b1b !important;
-  border-color: rgba(220, 38, 38, 0.35) !important;
-}
-
-/* In Dark / Night Mode: ensure table text is crisp mint-white and headers are bright glowing gold! */
-html.dark td {
-  color: #ecfdf5 !important;
-}
-
-html.dark th {
-  color: #fef08a !important;
-  font-weight: 900 !important;
-  text-shadow: 0 0 10px rgba(254, 240, 138, 0.4);
-}
-
-html.dark .text-white\/40,
-html.dark .text-white\/50,
-html.dark .text-white\/60 {
-  color: #a7f3d0 !important;
+  color: #065f46;
+  opacity: 0.6;
 }

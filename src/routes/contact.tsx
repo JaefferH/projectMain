@@ -24,7 +24,7 @@ export function Contact() {
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         
         {/* ── COOL CALL US NOW BANNER CARD ── */}
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#047857] via-[#059669] to-[#10b981] p-8 sm:p-12 border border-[#34d399]/40 shadow-[0_12px_40px_rgba(16,185,129,0.35)] text-white mb-10">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#047857] via-[#059669] to-[#047857] p-8 sm:p-12 border border-[#34d399]/40 shadow-[0_12px_40px_rgba(16,185,129,0.35)] text-white mb-10">
           <div className="pattern-grid pointer-events-none absolute inset-0 text-white/10" />
           <div className="relative z-10 flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-5">
@@ -33,16 +33,16 @@ export function Contact() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6ee7b7] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-4 w-4 bg-[#6ee7b7]"></span>
                 </span>
-                <PhoneCall className="h-8 w-8 animate-bounce" />
+                <PhoneCall className="h-8 w-8 animate-bounce text-white" />
               </div>
               <div>
-                <span className="inline-block px-3 py-1 rounded-full bg-[#6ee7b7]/20 text-[#6ee7b7] text-xs font-extrabold uppercase tracking-widest mb-1.5 border border-[#6ee7b7]/30 shadow-sm">
+                <span className="inline-block px-3.5 py-1 rounded-full bg-white/20 text-white text-xs font-black uppercase tracking-widest mb-1.5 border border-white/30 shadow-sm">
                   Direct Line • Phone Support
                 </span>
                 <h2 className="font-display text-2xl font-extrabold text-white sm:text-3xl tracking-wide drop-shadow-sm">
                   Call Us Now
                 </h2>
-                <p className="text-emerald-100/90 font-medium text-sm mt-0.5">
+                <p className="text-emerald-50 font-medium text-sm mt-0.5 drop-shadow-sm">
                   Have questions or want to register? Speak directly with our madrasah administration.
                 </p>
               </div>
@@ -50,9 +50,9 @@ export function Contact() {
 
             <a
               href={PHONE_TEL}
-              className="inline-flex items-center gap-3 rounded-xl bg-[#6ee7b7] hover:bg-[#a7f3d0] text-[#021a12] px-8 py-4 text-base font-extrabold shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+              className="inline-flex items-center gap-3 rounded-xl bg-white hover:bg-emerald-50 text-[#042c22] px-8 py-4 text-base font-black shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer shrink-0"
             >
-              <PhoneCall className="h-5 w-5 text-[#021a12]" />
+              <PhoneCall className="h-5 w-5 text-[#047857]" />
               <span>{PHONE_NUMBER}</span>
             </a>
           </div>

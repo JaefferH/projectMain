@@ -34,10 +34,10 @@ export function Programs() {
       <PageHeader title={t("programs.title")} subtitle={t("programs.sub")} />
       <section className="mx-auto grid max-w-6xl gap-5 px-4 py-16 sm:px-6 md:grid-cols-2">
         {items.map((p) => (
-          <article key={p.t} className="rounded-2xl bg-white dark:bg-[#042f22]/90 flex flex-col p-6 border border-emerald-200 dark:border-[#34d399]/30 shadow-lg transition-all hover:scale-[1.02]">
+          <article key={p.t} className="rounded-2xl bg-white dark:bg-[#042f22]/90 flex flex-col p-6 border border-emerald-200 dark:border-[#34d399]/30 shadow-md hover:shadow-xl transition-all hover:scale-[1.01]">
             <h2 className="font-display text-xl font-extrabold text-[#042c22] dark:text-[#6ee7b7]">{t(p.t)}</h2>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-[#047857] dark:text-emerald-100/90 font-medium">{t(p.b)}</p>
-            <p className="mt-4 text-xs font-extrabold uppercase tracking-[0.14em] text-[#047857] dark:text-[#34d399] bg-emerald-100 dark:bg-[#34d399]/20 px-3 py-1 rounded-full self-start border border-emerald-300 dark:border-[#34d399]/30 shadow-sm">
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-[#064e3b] dark:text-emerald-100/90 font-medium">{t(p.b)}</p>
+            <p className="mt-4 text-xs font-black uppercase tracking-[0.14em] text-[#047857] dark:text-[#34d399] bg-emerald-100 dark:bg-[#34d399]/20 px-3 py-1 rounded-full self-start border border-emerald-300 dark:border-[#34d399]/30 shadow-sm">
               {p.meta[lang]}
             </p>
           </article>
