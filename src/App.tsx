@@ -103,17 +103,12 @@ function App() {
     if (bootstrapped.current) return;
     bootstrapped.current = true;
 
-    // Handle direct URL path navigation (e.g. /portal, /auth, /login)
+    // Always start from Home Page unless visitor specifically navigates to /portal, /auth, or /login
     const path = window.location.pathname.toLowerCase();
-    const hasToken = localStorage.getItem('accessToken');
-    const isAuth = useAppStore.getState().authenticated;
-
     if (path.includes('/portal') || path.includes('/auth') || path.includes('/login')) {
-      if (!isAuth && !hasToken) {
-        useAppStore.setState({ authenticated: false, currentScreen: 'auth' });
-      }
-    } else if (!hasToken && !isAuth) {
-      useAppStore.setState({ authenticated: false, currentScreen: 'landing' });
+      useAppStore.setState({ currentScreen: 'auth' });
+    } else {
+      useAppStore.setState({ currentScreen: 'landing' });
     }
 
     // Fetch initial backend data for data store

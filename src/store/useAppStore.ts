@@ -231,6 +231,14 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: 'al-imam-app-storage',
+      partialize: (state) => ({
+        currentLanguage: state.currentLanguage,
+        rtlMode: state.rtlMode,
+        authenticated: state.authenticated,
+        currentUser: state.currentUser,
+        userRole: state.userRole,
+        userPassword: state.userPassword,
+      }),
     }
   )
 );

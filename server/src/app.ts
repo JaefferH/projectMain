@@ -480,6 +480,52 @@ app.put('/api/students/:id/attendance', (req, res) => {
   res.json(records);
 });
 
+// Batch Student Attendance Endpoint
+app.post(['/api/attendance', '/api/attendance/batch', '/api/v1/attendance'], (req, res) => {
+  let attendance = readJson('attendance.json', []);
+  const records = req.body.records || (Array.isArray(req.body) ? req.body : [req.body]);
+
+  records.forEach((r: any) => {
+    const key = `${r.studentId}_${r.courseId}_${r.date}`;
+    const idx = attendance.findIndex((a: any) => `${a.studentId}_${a.courseId}_${a.date}` === key);
+    if (idx > -1) attendance[idx] = r;
+    else attendance.push(r);
+  });
+
+  writeJson('attendance.json', attendance);
+  res.json(records);
+});
+
+// Batch Teacher Attendance Endpoint
+app.post(['/api/teacher-attendance', '/api/teacher-attendance/batch', '/api/v1/teacher-attendance'], (req, res) => {
+  let tAtt = readJson('teacher-attendance.json', []);
+  const records = req.body.records || (Array.isArray(req.body) ? req.body : [req.body]);
+
+  records.forEach((r: any) => {
+    const idx = tAtt.findIndex((a: any) => a.teacherId === r.teacherId && a.date === r.date);
+    if (idx > -1) tAtt[idx] = r;
+    else tAtt.push(r);
+  });
+
+  writeJson('teacher-attendance.json', tAtt);
+  res.json(records);
+});
+
+// Batch Grades Endpoint
+app.post(['/api/grades/batch', '/api/v1/grades/batch'], (req, res) => {
+  let grades = readJson('grades.json', []);
+  const records = req.body.records || (Array.isArray(req.body) ? req.body : [req.body]);
+
+  records.forEach((r: any) => {
+    const idx = grades.findIndex((g: any) => g.id === r.id || (g.studentId === r.studentId && g.courseId === r.courseId));
+    if (idx > -1) grades[idx] = r;
+    else grades.push(r);
+  });
+
+  writeJson('grades.json', grades);
+  res.json(records);
+});
+
 // Explicit Admin Update Handler
 app.put(['/api/admins/:id', '/api/admins/:id/'], (req, res) => {
   let admins = readJson('admins.json', defaultAdmins);
