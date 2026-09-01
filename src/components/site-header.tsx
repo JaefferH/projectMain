@@ -135,27 +135,30 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-emerald-200/80 dark:border-border bg-white dark:bg-card px-4 py-3 lg:hidden shadow-lg space-y-1">
+        <nav className="border-t border-emerald-200/80 dark:border-emerald-800/80 bg-white dark:bg-[#03291e] px-4 py-3 lg:hidden shadow-2xl space-y-1">
           {links.map((l) => (
             <button
               key={l.screen}
               onClick={() => { setOpen(false); setScreen(l.screen as any); }}
-              className={`block w-full text-start rounded-xl px-3 py-2.5 text-sm font-bold transition-colors cursor-pointer ${
+              className={`block w-full text-start rounded-xl px-4 py-3 text-sm font-bold transition-all cursor-pointer ${
                 currentScreen === l.screen
-                  ? "bg-emerald-100 text-[#047857] dark:bg-[#6ee7b7]/20 dark:text-[#6ee7b7] font-extrabold"
-                  : "text-[#042c22] dark:text-emerald-100/90 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
+                  ? "bg-emerald-100 text-[#047857] dark:bg-[#10b981]/25 dark:text-[#6ee7b7] border border-emerald-300/60 dark:border-[#34d399]/40 font-extrabold shadow-sm"
+                  : "text-[#042c22] dark:text-emerald-50 hover:bg-emerald-50 dark:hover:bg-[#10b981]/15 hover:text-[#047857] dark:hover:text-[#6ee7b7]"
               }`}
             >
               {t(l.key)}
             </button>
           ))}
-          <button
-            type="button"
-            onClick={() => { setOpen(false); setScreen('auth'); }}
-            className="mt-2 w-full rounded-xl bg-gradient-to-r from-[#10b981] to-[#047857] px-3 py-3 text-center text-sm font-extrabold text-white shadow-md cursor-pointer active:scale-95"
-          >
-            {t("nav.portal")} &rarr;
-          </button>
+          <div className="pt-2">
+            <button
+              type="button"
+              onClick={() => { setOpen(false); setScreen('auth'); }}
+              className="w-full rounded-xl bg-gradient-to-r from-[#10b981] via-[#059669] to-[#047857] px-4 py-3 text-center text-sm font-extrabold text-white shadow-md hover:brightness-110 cursor-pointer active:scale-95 transition-all flex items-center justify-center gap-2"
+            >
+              <span>{t("nav.portal")}</span>
+              <span>&rarr;</span>
+            </button>
+          </div>
         </nav>
       )}
     </header>

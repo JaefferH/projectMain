@@ -67,25 +67,29 @@ export function Faq() {
             ))}
           </div>
 
-          <aside className="rounded-2xl bg-white dark:bg-card border border-emerald-200 dark:border-border p-6 shadow-md lg:sticky lg:top-24 h-fit">
-            <HelpCircle className="h-7 w-7 text-[#059669] dark:text-[#34d399]" />
-            <h2 className="mt-3 font-display text-xl font-extrabold text-[#042c22] dark:text-white">{t("faq.stillT")}</h2>
-            <p className="mt-2 text-sm font-medium text-[#064e3b] dark:text-emerald-100/80 leading-relaxed">{t("faq.stillB")}</p>
+          <aside className="rounded-2xl bg-white dark:bg-[#042f22]/95 border border-emerald-200 dark:border-[#34d399]/40 p-6 shadow-md dark:shadow-[0_8px_30px_rgba(4,47,34,0.6)] lg:sticky lg:top-24 h-fit transition-all">
+            <div className="flex items-center gap-2">
+              <div className="p-2 rounded-xl bg-emerald-100 dark:bg-[#34d399]/20 text-[#059669] dark:text-[#34d399] border border-emerald-200 dark:border-[#34d399]/30">
+                <HelpCircle className="h-6 w-6" />
+              </div>
+            </div>
+            <h2 className="mt-3.5 font-display text-xl font-extrabold text-[#042c22] dark:text-[#6ee7b7]">{t("faq.stillT")}</h2>
+            <p className="mt-2 text-sm font-medium text-[#064e3b] dark:text-emerald-100 leading-relaxed">{t("faq.stillB")}</p>
             <a
               href="#contact"
-              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#10b981] to-[#047857] text-white px-5 py-3 text-xs font-black shadow-md hover:scale-105 transition-all cursor-pointer"
+              className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#10b981] via-[#059669] to-[#047857] text-white px-5 py-3 text-xs font-black shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
             >
               <span>{t("contact.title")}</span>
               <span>&rarr;</span>
             </a>
-            <ul className="mt-6 space-y-2 border-t border-emerald-100 dark:border-border pt-5 text-sm">
+            <ul className="mt-6 space-y-2.5 border-t border-emerald-100 dark:border-emerald-800/60 pt-5 text-sm">
               <li>
-                <a href="#programs" className="text-[#042c22] dark:text-slate-200 hover:text-[#059669] dark:hover:text-[#6ee7b7] font-semibold">
+                <a href="#programs" className="text-[#042c22] dark:text-emerald-200 hover:text-[#059669] dark:hover:text-[#6ee7b7] font-semibold transition-colors">
                   {t("nav.programs")}
                 </a>
               </li>
               <li>
-                <a href="#about" className="text-[#042c22] dark:text-slate-200 hover:text-[#059669] dark:hover:text-[#6ee7b7] font-semibold">
+                <a href="#about" className="text-[#042c22] dark:text-emerald-200 hover:text-[#059669] dark:hover:text-[#6ee7b7] font-semibold transition-colors">
                   {t("nav.about")}
                 </a>
               </li>
