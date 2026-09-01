@@ -22,18 +22,18 @@ export function HeroBackdrop({
         <img
           key={src}
           src={src}
-          alt=""
+          alt="Al Imam Hassan Mosque & Madrasah"
           width={1920}
           height={1088}
-          className="absolute inset-0 -z-20 h-full w-full object-cover transition-opacity duration-[1600ms] ease-out"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center transition-opacity duration-[1600ms] ease-out brightness-105"
           style={{
             opacity: i === active ? 1 : 0,
-            transform: i === active ? "scale(1)" : "scale(1.06)",
+            transform: i === active ? "scale(1)" : "scale(1.05)",
             transition: "opacity 1600ms ease-out, transform 8000ms ease-out",
           }}
         />
       ))}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-[#021a12]/70 to-[#021a12]/95" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/40 via-black/20 to-[#021a12]/80 sm:from-black/50 sm:via-black/30 sm:to-[#021a12]/90" />
       <div className="relative w-full">{children}</div>
 
       <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">

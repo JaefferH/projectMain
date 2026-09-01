@@ -94,11 +94,11 @@ export default function LandingPage() {
       {/* Background Layer: Institute Photo */}
       <div className="absolute inset-0 z-0 bg-black">
         <div 
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-30"
+          className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 opacity-60"
           style={{ backgroundImage: 'url("/school-building.jpg")' }}
         ></div>
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/80 to-transparent"></div>
-        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/90 to-transparent"></div>
+        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-black/50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-black/65 to-transparent"></div>
       </div>
 
       {/* Geometric Framing Accents */}

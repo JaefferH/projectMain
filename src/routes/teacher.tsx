@@ -4,7 +4,6 @@ import {
   Users, CheckSquare, BookOpen, Calendar, DollarSign, LogOut, Check, X, RefreshCw
 } from "lucide-react";
 import { useI18n, languages, nextLang } from "@/lib/i18n";
-import { useTheme } from "@/lib/theme";
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
@@ -20,7 +19,6 @@ export const Route = createFileRoute("/teacher" as any)({
 
 function TeacherDashboardRoute() {
   const { t, lang, setLang } = useI18n();
-  const { theme, toggle } = useTheme();
   const [activeTab, setActiveTab] = useState<"attendance" | "roster" | "gradebook" | "schedule" | "salary">("attendance");
 
   const [students, setStudents] = useState<any[]>([]);
@@ -118,9 +116,6 @@ function TeacherDashboardRoute() {
           </button>
           <button onClick={() => setLang(nextLang(lang))} className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-accent">
             {languages.find((l) => l.code === nextLang(lang))?.label}
-          </button>
-          <button onClick={toggle} className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-accent">
-            {theme === "dark" ? "☀" : "☾"}
           </button>
           <button onClick={handleLogout} className="flex items-center gap-1.5 bg-destructive/10 text-destructive border border-destructive/30 px-3 py-1.5 rounded-lg text-xs font-semibold hover:bg-destructive/20 transition-colors">
             <LogOut className="h-3.5 w-3.5" />

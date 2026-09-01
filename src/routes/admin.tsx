@@ -5,7 +5,6 @@ import {
   TrendingUp, TrendingDown, RefreshCw
 } from "lucide-react";
 import { useI18n, languages, nextLang } from "@/lib/i18n";
-import { useTheme } from "@/lib/theme";
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
 
@@ -21,7 +20,6 @@ export const Route = createFileRoute("/admin" as any)({
 
 function AdminDashboardRoute() {
   const { t, lang, setLang } = useI18n();
-  const { theme, toggle } = useTheme();
   const [activeTab, setActiveTab] = useState<"overview" | "students" | "teachers" | "finance" | "telegram">("overview");
 
   // Data states
@@ -154,12 +152,6 @@ function AdminDashboardRoute() {
             className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-accent"
           >
             {languages.find((l) => l.code === nextLang(lang))?.label}
-          </button>
-          <button
-            onClick={toggle}
-            className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold hover:bg-accent"
-          >
-            {theme === "dark" ? "☀" : "☾"}
           </button>
           <button
             onClick={handleLogout}

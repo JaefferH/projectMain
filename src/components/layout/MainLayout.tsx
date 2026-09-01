@@ -1,10 +1,9 @@
 import React from 'react';
 import { useAppStore, Screen } from '../../store/useAppStore';
 import { t } from '../../lib/translations';
-import { useTheme } from '@/lib/theme';
 import { 
   LayoutDashboard, Users, GraduationCap, BookOpen, Calendar, BookCheck, ScrollText, 
-  LogOut, Menu, X, Globe, Settings, MessageSquare, Briefcase, FileArchive, Shield, Landmark, Plus, Sun, Moon
+  LogOut, Menu, X, Globe, Settings, MessageSquare, Briefcase, FileArchive, Shield, Landmark, Plus
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScripturalBanner from './ScripturalBanner';
@@ -12,7 +11,6 @@ import { ArabicCalligraphyBg, ArabicPatternBg } from '../ArabicDecoration';
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { userRole, currentScreen, setScreen, logout, currentLanguage, rtlMode, setLanguage, currentUser } = useAppStore();
-  const { theme, toggle: toggleTheme } = useTheme();
   
   const [isMobile, setIsMobile] = React.useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const [sidebarOpen, setSidebarOpen] = React.useState(typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
@@ -37,8 +35,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       setSidebarOpen(false);
     }
   };
-
-  const isDark = theme === 'dark';
 
   const adminMenu = [
     { id: 'admin_dashboard', icon: LayoutDashboard, label: t('dashboard', currentLanguage) },
@@ -76,22 +72,22 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <div
-      className={`flex h-screen overflow-hidden ${rtlMode ? 'font-arabic' : 'font-sans'} relative ${isDark ? 'bg-[#021a12] text-white' : 'bg-[#edf9f3] text-[#042c22]'}`}
+      className={`flex h-screen overflow-hidden ${rtlMode ? 'font-arabic' : 'font-sans'} relative bg-[#021a12] text-white`}
     >
-      {/* ── Global Background: Responsive Light/Dark Mode ── */}
-      <div className={`absolute inset-0 z-0 ${isDark ? 'bg-[#021a12]' : 'bg-[#edf9f3]'}`}>
+      {/* ── Global Background: Portal Islamic Luxury Theme ── */}
+      <div className="absolute inset-0 z-0 bg-[#021a12]">
         <div
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat ${isDark ? 'opacity-20' : 'opacity-10'}`}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
           style={{ backgroundImage: 'url("/5877690125452512689_120.jpg")' }}
         />
-        {/* Dark / Light green overlay */}
-        <div className={`absolute inset-0 ${isDark ? 'bg-[#021a12]/80' : 'bg-[#edf9f3]/90'} backdrop-blur-md`} />
+        {/* Dark green overlay */}
+        <div className="absolute inset-0 bg-[#021a12]/80 backdrop-blur-md" />
         {/* Arabic Calligraphy Watermarks Overlay */}
         <ArabicCalligraphyBg density="medium" />
         {/* Islamic Star Grid Pattern Overlay */}
         <ArabicPatternBg />
         {/* Subtle vignette for depth */}
-        <div className={`absolute inset-0 ${isDark ? 'bg-[radial-gradient(ellipse_at_50%_0%,transparent_40%,rgba(2,15,10,0.85)_100%)]' : 'bg-[radial-gradient(ellipse_at_50%_0%,transparent_40%,rgba(220,245,232,0.85)_100%)]'}`} />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,transparent_40%,rgba(2,15,10,0.85)_100%)]" />
       </div>
 
       {/* Mobile Backdrop Overlay */}
@@ -145,9 +141,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                     className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer text-left ${
                       isActive
                         ? 'btn-gold font-bold shadow-[0_0_20px_rgba(16,185,129,0.3)] scale-[1.02] text-white'
-                        : isDark
-                        ? 'text-emerald-100/90 hover:bg-white/10 hover:text-white hover:translate-x-1'
-                        : 'text-[#047857] hover:bg-emerald-100/60 hover:text-[#042c22] hover:translate-x-1'
+                        : 'text-emerald-100/90 hover:bg-white/10 hover:text-white hover:translate-x-1'
                     }`}
                   >
                     <Icon size={19} className={isActive ? 'text-[#042c22]' : 'text-[#d4af37] shrink-0'} />
@@ -165,13 +159,11 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
                   currentScreen === 'account_settings'
                     ? 'bg-gradient-to-r from-[#10b981] to-[#047857] text-white font-bold shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-[1.02]'
-                    : isDark
-                    ? 'text-[#6ee7b7] hover:bg-[#10b981]/20 hover:text-[#34d399] hover:translate-x-1 font-bold'
-                    : 'text-[#047857] hover:bg-emerald-100 hover:text-[#042c22] hover:translate-x-1 font-bold'
+                    : 'text-[#6ee7b7] hover:bg-[#10b981]/20 hover:text-[#34d399] hover:translate-x-1 font-bold'
                 }`}
               >
-                <Settings size={18} className={currentScreen === 'account_settings' ? 'text-white' : 'text-[#10b981] dark:text-[#6ee7b7]'} />
-                <span className="text-xs font-extrabold text-[#047857] dark:text-[#6ee7b7]">{settingsLabel}</span>
+                <Settings size={18} className={currentScreen === 'account_settings' ? 'text-white' : 'text-[#6ee7b7]'} />
+                <span className="text-xs font-extrabold text-[#6ee7b7]">{settingsLabel}</span>
               </button>
 
               {/* User identity chip */}
@@ -238,21 +230,6 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 <span>Register Student</span>
               </button>
             )}
-
-            {/* Day / Night Mode Theme Toggle Switch */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all cursor-pointer shadow-sm ${
-                isDark
-                  ? 'border-[#6ee7b7]/40 bg-[#042f22]/80 text-[#6ee7b7] hover:bg-[#10b981]/20'
-                  : 'border-emerald-500/40 bg-white text-[#047857] hover:bg-emerald-50'
-              }`}
-            >
-              {isDark ? <Sun size={15} className="text-[#6ee7b7]" /> : <Moon size={15} className="text-[#047857]" />}
-              <span className="hidden sm:inline">{isDark ? '☀ Light' : '☾ Dark'}</span>
-            </button>
 
             {/* Language Switcher */}
             <div

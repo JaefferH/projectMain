@@ -38,14 +38,14 @@ export function About() {
         ))}
       </section>
 
-      <section className="border-t border-emerald-100 dark:border-border bg-white dark:bg-card/50 py-16">
+      <section className="border-t border-emerald-100 dark:border-emerald-900/60 bg-[#f4fbf7]/60 dark:bg-[#021f17] py-16 transition-colors">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="max-w-2xl">
-            <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-100 dark:bg-[#6ee7b7]/20 text-[#047857] dark:text-[#6ee7b7] text-xs font-black uppercase tracking-widest mb-3 border border-emerald-300 dark:border-[#6ee7b7]/30 shadow-sm">
+            <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-100 dark:bg-[#6ee7b7]/20 text-[#047857] dark:text-[#6ee7b7] text-xs font-black uppercase tracking-widest mb-3 border border-emerald-300/80 dark:border-[#6ee7b7]/40 shadow-sm">
               Admissions Policy
             </span>
-            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#042c22] dark:text-[#6ee7b7]">{t("admissions.title")}</h2>
-            <p className="mt-2 text-[#064e3b] dark:text-emerald-100/90 font-medium text-base">{t("admissions.sub")}</p>
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#042c22] dark:text-[#6ee7b7] tracking-wide">{t("admissions.title")}</h2>
+            <p className="mt-2.5 text-[#064e3b] dark:text-emerald-100 font-medium text-base sm:text-lg leading-relaxed">{t("admissions.sub")}</p>
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -63,9 +63,9 @@ export function About() {
                 isPhone: true,
               },
             ].map((item) => (
-              <article key={item.titleKey} className="rounded-2xl bg-[#f4fbf7] dark:bg-[#042f22] flex flex-col justify-between p-6 border border-emerald-200 dark:border-[#34d399]/40 shadow-md hover:shadow-xl transition-all">
+              <article key={item.titleKey} className="rounded-2xl bg-white dark:bg-[#032b1f] hover:bg-emerald-50/50 dark:hover:bg-[#043828] flex flex-col justify-between p-6 border border-emerald-200/90 dark:border-[#34d399]/40 shadow-md dark:shadow-[0_8px_25px_rgba(2,26,18,0.5)] hover:shadow-xl transition-all">
                 <div>
-                  <h3 className="font-display text-lg font-extrabold text-[#042c22] dark:text-[#6ee7b7]">{t(item.titleKey)}</h3>
+                  <h3 className="font-display text-lg font-extrabold text-[#042c22] dark:text-[#fef08a]">{t(item.titleKey)}</h3>
                   {item.isPhone ? (
                     <a
                       href={`tel:${t(item.bodyKey)}`}
@@ -74,7 +74,7 @@ export function About() {
                       {t(item.bodyKey)}
                     </a>
                   ) : (
-                    <p className="mt-2.5 text-sm leading-relaxed text-[#064e3b] dark:text-emerald-100 font-medium">{t(item.bodyKey)}</p>
+                    <p className="mt-2.5 text-sm leading-relaxed text-[#064e3b] dark:text-emerald-100/95 font-medium">{t(item.bodyKey)}</p>
                   )}
                 </div>
               </article>
