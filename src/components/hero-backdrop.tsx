@@ -33,8 +33,7 @@ export function HeroBackdrop({
           }}
         />
       ))}
-      {/* Dark scrim overlay: slightly richer on mobile screens so text is crystal-clear in daylight */}
-      <div className="hero-scrim absolute inset-0 -z-10 bg-black/60 sm:bg-black/40 backdrop-blur-[0.5px]" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/75 via-[#021a12]/70 to-[#021a12]/95" />
       <div className="relative w-full">{children}</div>
 
       <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">
@@ -44,7 +43,7 @@ export function HeroBackdrop({
             type="button"
             aria-label={`Slide ${i + 1}`}
             onClick={() => setActive(i)}
-            className="h-1.5 rounded-full bg-on-hero transition-all"
+            className="h-1.5 rounded-full bg-white transition-all cursor-pointer"
             style={{ width: i === active ? 28 : 10, opacity: i === active ? 0.95 : 0.4 }}
           />
         ))}
@@ -52,3 +51,4 @@ export function HeroBackdrop({
     </section>
   );
 }
+

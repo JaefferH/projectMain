@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useI18n } from "@/lib/i18n";
 import { knowledgeQuotes } from "@/lib/quotes";
-import { Sparkles, X, BookOpen, ScrollText } from "lucide-react";
+import { Sparkles, X, ScrollText } from "lucide-react";
 
 export function HeroQuote() {
   const { lang } = useI18n();
@@ -29,7 +29,7 @@ export function HeroQuote() {
             exit={{ opacity: 0, y: -15, scale: 0.98 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
             onClick={() => setSelectedQuote(q)}
-            className="cursor-pointer group rounded-2xl p-3.5 sm:p-4 bg-black/75 sm:bg-black/40 hover:bg-black/85 sm:hover:bg-black/60 border border-[#6ee7b7]/40 sm:border-[#6ee7b7]/30 hover:border-[#6ee7b7]/70 backdrop-blur-md transition-all shadow-lg hover:shadow-[0_0_25px_rgba(110,231,183,0.3)] inline-block text-left w-full sm:w-auto"
+            className="cursor-pointer group rounded-2xl p-4 sm:p-5 bg-black/75 hover:bg-black/85 border border-[#6ee7b7]/50 hover:border-[#6ee7b7] backdrop-blur-md transition-all shadow-xl inline-block text-left w-full sm:w-auto"
           >
             <div className="flex items-center gap-2 mb-1.5 text-xs text-[#6ee7b7] font-bold">
               <Sparkles className="h-3.5 w-3.5 animate-spin text-[#6ee7b7]" />
@@ -44,7 +44,7 @@ export function HeroQuote() {
             <p className="mt-1.5 font-display text-base sm:text-2xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] group-hover:text-[#6ee7b7] transition-colors leading-snug">
               {q.text[lang]}
             </p>
-            <figcaption className="mt-3 flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#34d399] drop-shadow-sm">
+            <figcaption className="mt-3 flex items-center gap-2 text-xs font-black uppercase tracking-[0.16em] text-[#34d399] drop-shadow-sm">
               <span aria-hidden className="h-px w-6 sm:w-8 bg-[#6ee7b7]" />
               {q.ref[lang]}
             </figcaption>
@@ -113,3 +113,4 @@ export function HeroQuote() {
     </>
   );
 }
+
