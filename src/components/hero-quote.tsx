@@ -20,7 +20,7 @@ export function HeroQuote() {
 
   return (
     <>
-      <figure className="mt-4 min-h-[8.5rem] relative">
+      <figure className="mt-3 sm:mt-4 min-h-[6.5rem] sm:min-h-[8.5rem] relative">
         <AnimatePresence mode="wait">
           <motion.blockquote
             key={q.id}
@@ -29,7 +29,7 @@ export function HeroQuote() {
             exit={{ opacity: 0, y: -15, scale: 0.98 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
             onClick={() => setSelectedQuote(q)}
-            className="cursor-pointer group rounded-2xl p-3.5 bg-black/40 hover:bg-black/60 border border-[#6ee7b7]/30 hover:border-[#6ee7b7]/60 backdrop-blur-md transition-all shadow-lg hover:shadow-[0_0_25px_rgba(110,231,183,0.3)] inline-block text-left"
+            className="cursor-pointer group rounded-2xl p-3.5 sm:p-4 bg-black/75 sm:bg-black/40 hover:bg-black/85 sm:hover:bg-black/60 border border-[#6ee7b7]/40 sm:border-[#6ee7b7]/30 hover:border-[#6ee7b7]/70 backdrop-blur-md transition-all shadow-lg hover:shadow-[0_0_25px_rgba(110,231,183,0.3)] inline-block text-left w-full sm:w-auto"
           >
             <div className="flex items-center gap-2 mb-1.5 text-xs text-[#6ee7b7] font-bold">
               <Sparkles className="h-3.5 w-3.5 animate-spin text-[#6ee7b7]" />
@@ -37,15 +37,15 @@ export function HeroQuote() {
             </div>
 
             {lang !== "ar" && (
-              <p dir="rtl" lang="ar" className="font-display text-2xl font-extrabold text-[#6ee7b7] sm:text-3xl drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]">
+              <p dir="rtl" lang="ar" className="font-display text-xl sm:text-3xl font-extrabold text-[#6ee7b7] leading-relaxed drop-shadow-[0_4px_12px_rgba(0,0,0,0.95)]">
                 {q.arabic}
               </p>
             )}
-            <p className="mt-1.5 font-display text-xl sm:text-2xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] group-hover:text-[#6ee7b7] transition-colors">
+            <p className="mt-1.5 font-display text-base sm:text-2xl font-bold text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] group-hover:text-[#6ee7b7] transition-colors leading-snug">
               {q.text[lang]}
             </p>
-            <figcaption className="mt-3 flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.18em] text-[#34d399] drop-shadow-sm">
-              <span aria-hidden className="h-px w-8 bg-[#6ee7b7]" />
+            <figcaption className="mt-3 flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#34d399] drop-shadow-sm">
+              <span aria-hidden className="h-px w-6 sm:w-8 bg-[#6ee7b7]" />
               {q.ref[lang]}
             </figcaption>
           </motion.blockquote>
@@ -55,13 +55,13 @@ export function HeroQuote() {
       {/* ── INTERACTIVE HADITH POP-UP MODAL ── */}
       <AnimatePresence>
         {selectedQuote && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.85, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 30 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-lg overflow-hidden rounded-3xl bg-gradient-to-br from-[#022c1e] via-[#043d2c] to-[#021a12] p-8 border-2 border-[#6ee7b7]/60 shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(110,231,183,0.35)] text-white"
+              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-3xl bg-gradient-to-br from-[#022c1e] via-[#043d2c] to-[#021a12] p-6 sm:p-8 border-2 border-[#6ee7b7]/60 shadow-[0_20px_60px_rgba(0,0,0,0.9),0_0_40px_rgba(110,231,183,0.35)] text-white"
             >
               {/* Close Button */}
               <button

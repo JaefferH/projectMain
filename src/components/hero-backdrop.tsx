@@ -33,7 +33,8 @@ export function HeroBackdrop({
           }}
         />
       ))}
-      <div className="hero-scrim absolute inset-0 -z-10" />
+      {/* Dark scrim overlay: slightly richer on mobile screens so text is crystal-clear in daylight */}
+      <div className="hero-scrim absolute inset-0 -z-10 bg-black/60 sm:bg-black/40 backdrop-blur-[0.5px]" />
       <div className="relative w-full">{children}</div>
 
       <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">

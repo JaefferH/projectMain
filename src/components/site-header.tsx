@@ -135,12 +135,16 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <nav className="border-t border-border bg-background px-4 py-3 lg:hidden">
+        <nav className="border-t border-emerald-200/80 dark:border-border bg-white dark:bg-card px-4 py-3 lg:hidden shadow-lg space-y-1">
           {links.map((l) => (
             <button
               key={l.screen}
               onClick={() => { setOpen(false); setScreen(l.screen as any); }}
-              className="block w-full text-start rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+              className={`block w-full text-start rounded-xl px-3 py-2.5 text-sm font-bold transition-colors cursor-pointer ${
+                currentScreen === l.screen
+                  ? "bg-emerald-100 text-[#047857] dark:bg-[#6ee7b7]/20 dark:text-[#6ee7b7] font-extrabold"
+                  : "text-[#042c22] dark:text-emerald-100/90 hover:bg-emerald-50 dark:hover:bg-emerald-900/30"
+              }`}
             >
               {t(l.key)}
             </button>
@@ -148,9 +152,9 @@ export function SiteHeader() {
           <button
             type="button"
             onClick={() => { setOpen(false); setScreen('auth'); }}
-            className="mt-2 w-full rounded-md bg-primary px-3 py-2.5 text-center text-sm font-semibold text-primary-foreground"
+            className="mt-2 w-full rounded-xl bg-gradient-to-r from-[#10b981] to-[#047857] px-3 py-3 text-center text-sm font-extrabold text-white shadow-md cursor-pointer active:scale-95"
           >
-            {t("nav.portal")}
+            {t("nav.portal")} &rarr;
           </button>
         </nav>
       )}
