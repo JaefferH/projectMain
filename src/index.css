@@ -64,17 +64,6 @@ html.dark, body.dark, .dark {
   }
 }
 
-.hero-scrim {
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(2, 26, 18, 0.82) 45%,
-    rgba(2, 26, 18, 0.95) 100%
-  );
-  backdrop-filter: blur(0.5px);
-  -webkit-backdrop-filter: blur(0.5px);
-}
-
 /* Glassmorphism Design System Utility Classes */
 .glass-card {
   background: var(--glass-bg);

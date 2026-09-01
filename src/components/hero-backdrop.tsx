@@ -33,7 +33,7 @@ export function HeroBackdrop({
           }}
         />
       ))}
-      <div className="hero-scrim absolute inset-0 -z-10 bg-gradient-to-b from-black/80 via-[#021a12]/85 to-[#021a12]/95" />
+      <div className="hero-scrim absolute inset-0 -z-10" />
       <div className="relative w-full">{children}</div>
 
       <div className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-2">

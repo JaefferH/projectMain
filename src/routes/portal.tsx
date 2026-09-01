@@ -210,40 +210,34 @@ function Portal() {
           <p className={`mt-1.5 text-xs sm:text-sm ${isDark ? 'text-emerald-100/70' : 'text-emerald-800/80'}`}>{t("portal.sub")}</p>
 
           {/* Quick Demo Fill Badges (Super Convenient on Mobile Phones!) */}
-          <div className={`mt-4 p-3 rounded-2xl ${isDark ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-white border-emerald-300 shadow-sm'} border`}>
-            <div className={`flex items-center gap-1.5 text-[11px] font-black ${isDark ? 'text-[#fef08a]' : 'text-[#047857]'} mb-2 uppercase tracking-wide`}>
-              <Sparkles size={13} className={isDark ? "text-[#fef08a]" : "text-[#047857]"} />
+          <div className="mt-4 p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+            <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#d4af37] mb-2 uppercase tracking-wide">
+              <Sparkles size={13} className="text-[#d4af37]" />
               <span>Tap to Test / Quick Demo Fill:</span>
             </div>
             <div className="grid grid-cols-3 gap-1.5">
               <button
                 type="button"
                 onClick={() => handleQuickFill("admin", "newAdmin@123")}
-                className={`flex items-center justify-center gap-1 py-2 px-2 rounded-xl text-[11px] font-black border transition-all cursor-pointer active:scale-95 ${
-                  isDark ? 'bg-emerald-900/40 hover:bg-emerald-800/60 border-emerald-500/30 text-emerald-100' : 'bg-emerald-100 hover:bg-emerald-200 border-emerald-300 text-[#042c22]'
-                }`}
+                className="flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl text-[11px] font-extrabold bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-500/30 text-emerald-200 transition-all cursor-pointer active:scale-95"
               >
-                <Shield size={12} className={isDark ? "text-[#fef08a]" : "text-[#047857]"} />
+                <Shield size={11} className="text-[#d4af37]" />
                 <span>Admin</span>
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickFill("teacher1", "password123")}
-                className={`flex items-center justify-center gap-1 py-2 px-2 rounded-xl text-[11px] font-black border transition-all cursor-pointer active:scale-95 ${
-                  isDark ? 'bg-emerald-900/40 hover:bg-emerald-800/60 border-emerald-500/30 text-emerald-100' : 'bg-emerald-100 hover:bg-emerald-200 border-emerald-300 text-[#042c22]'
-                }`}
+                className="flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl text-[11px] font-extrabold bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-500/30 text-emerald-200 transition-all cursor-pointer active:scale-95"
               >
-                <UserCheck size={12} className={isDark ? "text-[#34d399]" : "text-[#047857]"} />
+                <UserCheck size={11} className="text-[#34d399]" />
                 <span>Teacher</span>
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickFill("SBI0001", "password123")}
-                className={`flex items-center justify-center gap-1 py-2 px-2 rounded-xl text-[11px] font-black border transition-all cursor-pointer active:scale-95 ${
-                  isDark ? 'bg-emerald-900/40 hover:bg-emerald-800/60 border-emerald-500/30 text-emerald-100' : 'bg-emerald-100 hover:bg-emerald-200 border-emerald-300 text-[#042c22]'
-                }`}
+                className="flex items-center justify-center gap-1 py-1.5 px-2 rounded-xl text-[11px] font-extrabold bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-500/30 text-emerald-200 transition-all cursor-pointer active:scale-95"
               >
-                <GraduationCap size={12} className={isDark ? "text-[#6ee7b7]" : "text-[#047857]"} />
+                <GraduationCap size={11} className="text-[#6ee7b7]" />
                 <span>Student</span>
               </button>
             </div>

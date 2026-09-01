@@ -28,68 +28,72 @@ function Home() {
   return (
     <PageShell>
       <HeroBackdrop>
-        <div className="mx-auto max-w-6xl px-4 pb-16 pt-28 sm:pb-24 sm:pt-36 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 pb-24 pt-36 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 25, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="max-w-3xl text-left space-y-4 sm:space-y-5"
+            className="max-w-3xl text-left space-y-5"
           >
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="h-12 w-12 sm:h-16 sm:w-16 shrink-0">
-                <img src="/logo.png" alt="Al Imam Hassan Logo" className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(110,231,183,0.6)]" />
+            <div className="flex items-center gap-4">
+              <div className="h-16 w-16 shrink-0">
+                <img src="/logo.png" alt="Al Imam Hassan Logo" className="h-full w-full object-contain drop-shadow-[0_0_20px_rgba(110,231,183,0.5)]" />
               </div>
-              <p className="inline-flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-black uppercase tracking-[0.16em] sm:tracking-[0.22em] text-[#6ee7b7] bg-black/80 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#6ee7b7]/50 shadow-lg">
+              <p className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-[#6ee7b7] bg-black/70 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#6ee7b7]/40 shadow-lg">
                 <Sparkles className="h-3.5 w-3.5 text-[#6ee7b7] animate-spin" /> {t("hero.eyebrow")}
               </p>
             </div>
             
             {/* ── DYNAMIC 3-LANGUAGE TITLE STACK ── */}
-            <div className="space-y-2.5 sm:space-y-3">
+            <div className="space-y-3">
               {lang === "ar" ? (
                 /* Arabic Title */
-                <h1 dir="rtl" lang="ar" className="font-arabic text-3xl sm:text-6xl md:text-7xl font-extrabold text-[#6ee7b7] leading-snug drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)] tracking-wide">
+                <h1 dir="rtl" lang="ar" className="font-arabic text-4xl sm:text-6xl md:text-7xl font-extrabold text-[#6ee7b7] leading-relaxed drop-shadow-[0_0_30px_rgba(110,231,183,0.7)] tracking-wide">
                   مَسْجِدُ وَمَدْرَسَةُ الإِمَامِ حَسَنٍ
                 </h1>
               ) : lang === "am" ? (
                 /* Amharic Title */
-                <h1 className="font-display text-3xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight text-white drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]">
-                  አል ኢማም ሀሰን መስጂድ እና መድረሳ
+                <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] tracking-tight drop-shadow-[0_8px_30px_rgba(0,0,0,0.95)]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#a7f3d0] to-[#34d399] drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                    አል ኢማም ሀሰን መስጂድ እና መድረሳ
+                  </span>
                 </h1>
               ) : (
                 /* English Title */
-                <h1 className="font-display text-3xl sm:text-6xl md:text-7xl font-black leading-tight tracking-tight text-white drop-shadow-[0_4px_25px_rgba(0,0,0,0.95)]">
-                  Al Imam Hassan Mosque &amp; Madrasah
+                <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.1] tracking-tight drop-shadow-[0_8px_30px_rgba(0,0,0,0.95)]">
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#a7f3d0] to-[#34d399] drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
+                    Al Imam Hassan Mosque &amp; Madrasah
+                  </span>
                 </h1>
               )}
 
               {/* Sub-Crest Badge */}
               <div className="pt-1">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 sm:px-5 sm:py-2.5 rounded-full bg-[#021f17] border-2 border-[#fbbf24] text-[#fef08a] text-[11px] sm:text-sm font-black uppercase tracking-[0.14em] sm:tracking-[0.18em] shadow-[0_0_25px_rgba(251,191,36,0.6)] backdrop-blur-md font-arabic">
-                  <Sparkles className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-[#fbbf24] shrink-0 animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#021f17] border-2 border-[#fbbf24] text-[#fef08a] text-xs sm:text-sm font-black uppercase tracking-[0.18em] shadow-[0_0_25px_rgba(251,191,36,0.6)] backdrop-blur-md font-arabic">
+                  <Sparkles className="h-4 w-4 text-[#fbbf24] shrink-0 animate-pulse" />
                   <span className="text-[#fef08a] font-black">Mosque &amp; Madrasah • መስጂድ እና መድረሳ</span>
                 </span>
               </div>
             </div>
             
-            <div className="relative pt-1 sm:pt-2">
+            <div className="relative pt-2">
               <HeroQuote />
             </div>
             
-            <p className="max-w-xl text-sm sm:text-lg leading-relaxed font-semibold text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+            <p className="max-w-xl text-base sm:text-lg leading-relaxed font-semibold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
               {t("hero.sub")}
             </p>
             
-            <div className="pt-3 sm:pt-4 flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+            <div className="pt-4 flex flex-wrap gap-4">
               <a
                 href="#contact"
-                className="w-full sm:w-auto text-center rounded-xl bg-gradient-to-r from-[#6ee7b7] via-[#34d399] to-[#10b981] hover:from-[#a7f3d0] hover:to-[#34d399] text-[#021a12] px-8 py-3.5 text-sm sm:text-base font-black shadow-[0_0_25px_rgba(110,231,183,0.5)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                className="rounded-xl bg-gradient-to-r from-[#6ee7b7] via-[#34d399] to-[#10b981] hover:from-[#a7f3d0] hover:to-[#34d399] text-[#021a12] px-8 py-3.5 text-base font-extrabold shadow-[0_0_25px_rgba(110,231,183,0.45)] transition-all hover:scale-105 active:scale-95 cursor-pointer"
               >
                 {t("hero.cta1")} &rarr;
               </a>
               <a
                 href="#programs"
-                className="w-full sm:w-auto text-center rounded-xl bg-black/75 hover:bg-black/90 text-white border border-[#6ee7b7]/50 px-8 py-3.5 text-sm sm:text-base font-bold backdrop-blur-md transition-all hover:scale-105 cursor-pointer shadow-lg"
+                className="rounded-xl bg-black/60 hover:bg-black/80 text-white border border-[#6ee7b7]/40 px-8 py-3.5 text-base font-bold backdrop-blur-md transition-all hover:scale-105 cursor-pointer shadow-lg"
               >
                 {t("hero.cta2")}
               </a>
