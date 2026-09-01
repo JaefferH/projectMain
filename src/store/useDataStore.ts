@@ -1,7 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
 import {
-  Student, Teacher, Course, Payment, Salary, Attendance, Grade, TeacherAttendance, AcademicTerm, SystemAdmin, FinancialTransaction
+  Student, Teacher, Course, Payment, Salary, Attendance, Grade, TeacherAttendance, AcademicTerm, SystemAdmin, FinancialTransaction,
+  initialAdmins, initialStudents, initialTeachers, initialCourses
 } from '../lib/sampleData';
 
 const API_URL = import.meta.env.VITE_API_URL || '/api';
@@ -77,59 +78,69 @@ interface DataState {
   closeSemester: (term: string) => void;
 }
 
+const defaultTransactions: FinancialTransaction[] = [
+  { id: 'fin_1', type: 'Income', category: 'Tuition Fee', date: '2026-08-01', amount: 45000, description: 'Monthly Tuition Collections' },
+  { id: 'fin_2', type: 'Outcome', category: 'Teacher Salaries', date: '2026-08-05', amount: 25000, description: 'Faculty Payroll Disbursement' },
+  { id: 'fin_3', type: 'Outcome', category: 'Utilities & Maintenance', date: '2026-08-10', amount: 3500, description: 'Madrasah Electricity and Learning Materials' }
+];
+
 export const useDataStore = create<DataState>()((set) => ({
-  students: [],
-  teachers: [],
-  admins: [],
-  courses: [],
+  students: initialStudents,
+  teachers: initialTeachers,
+  admins: initialAdmins,
+  courses: initialCourses,
   payments: [],
   salaries: [],
   attendance: [],
   teacherAttendance: [],
   grades: [],
-  transactions: [],
-  dataLoaded: false,
+  transactions: defaultTransactions,
+  dataLoaded: true,
 
   fetchInitialData: async () => {
     try {
       const [adminsRes, studentsRes, teachersRes, financeRes, coursesRes, attRes, tAttRes, gradesRes] = await Promise.all([
-        axios.get(`${API_URL}/admins`),
-        axios.get(`${API_URL}/students`),
-        axios.get(`${API_URL}/teachers`),
-        axios.get(`${API_URL}/finance`),
-        axios.get(`${API_URL}/courses`),
-        axios.get(`${API_URL}/attendance`),
-        axios.get(`${API_URL}/teacher-attendance`),
-        axios.get(`${API_URL}/grades`),
+        axios.get(`${API_URL}/admins`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/students`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/teachers`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/finance`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/courses`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/attendance`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/teacher-attendance`, { timeout: 3000 }).catch(() => null),
+        axios.get(`${API_URL}/grades`, { timeout: 3000 }).catch(() => null),
       ]);
       const getData = (res: any) => {
-        if (!res || !res.data) return [];
-        if (Array.isArray(res.data)) return res.data;
-        if (res.data.data && Array.isArray(res.data.data)) return res.data.data;
-        if (res.data.data && Array.isArray(res.data.data.items)) return res.data.data.items;
-        return [];
+        if (!res || !res.data) return null;
+        if (typeof res.data === 'string') return null; // Filter out HTML from static rewrites
+        if (Array.isArray(res.data) && res.data.length > 0) return res.data;
+        if (res.data.data && Array.isArray(res.data.data) && res.data.data.length > 0) return res.data.data;
+        if (res.data.data && Array.isArray(res.data.data.items) && res.data.data.items.length > 0) return res.data.data.items;
+        return null;
       };
 
-      const adminsList = getData(adminsRes);
-      const adminsData = adminsList.length > 0 ? adminsList : [
-        { id: 'admin_1', nationalId: 'MA001', fullName: 'Master Admin', fathersName: 'Admin',
-          phone: '', address: '', email: '', username: 'admin', password: 'newAdmin@123', role: 'Admin' }
-      ];
+      const adminsData = getData(adminsRes) || initialAdmins;
+      const studentsData = getData(studentsRes) || initialStudents;
+      const teachersData = getData(teachersRes) || initialTeachers;
+      const transactionsData = getData(financeRes) || defaultTransactions;
+      const coursesData = getData(coursesRes) || initialCourses;
+      const attData = getData(attRes) || [];
+      const tAttData = getData(tAttRes) || [];
+      const gradesData = getData(gradesRes) || [];
 
       set({
         admins: adminsData,
-        students: getData(studentsRes),
-        teachers: getData(teachersRes),
-        transactions: getData(financeRes),
-        courses: getData(coursesRes),
-        attendance: getData(attRes),
-        teacherAttendance: getData(tAttRes),
-        grades: getData(gradesRes),
+        students: studentsData,
+        teachers: teachersData,
+        transactions: transactionsData,
+        courses: coursesData,
+        attendance: attData,
+        teacherAttendance: tAttData,
+        grades: gradesData,
         dataLoaded: true,
       });
     } catch (error) {
-      console.error('Error fetching initial data (backend may be offline):', error);
-      set({ dataLoaded: true }); // unblock login so UI can show error
+      console.warn('Backend server not connected, continuing with local store:', error);
+      set({ dataLoaded: true });
     }
   },
 

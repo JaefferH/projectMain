@@ -13,7 +13,30 @@ import { ArabicCalligraphyBg, ArabicPatternBg } from '../ArabicDecoration';
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const { userRole, currentScreen, setScreen, logout, currentLanguage, rtlMode, setLanguage, currentUser } = useAppStore();
   const { theme, toggle: toggleTheme } = useTheme();
-  const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  
+  const [isMobile, setIsMobile] = React.useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+  const [sidebarOpen, setSidebarOpen] = React.useState(typeof window !== 'undefined' ? window.innerWidth >= 768 : true);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) {
+        setSidebarOpen(false);
+      } else {
+        setSidebarOpen(true);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleNavClick = (screenId: Screen) => {
+    setScreen(screenId);
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
 
   const isDark = theme === 'dark';
 
@@ -71,6 +94,14 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
         <div className={`absolute inset-0 ${isDark ? 'bg-[radial-gradient(ellipse_at_50%_0%,transparent_40%,rgba(2,15,10,0.85)_100%)]' : 'bg-[radial-gradient(ellipse_at_50%_0%,transparent_40%,rgba(220,245,232,0.85)_100%)]'}`} />
       </div>
 
+      {/* Mobile Backdrop Overlay */}
+      {isMobile && sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 animate-in fade-in duration-200"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* ── Sidebar ─────────────────────────────────────────────────── */}
       <AnimatePresence mode="wait">
         {sidebarOpen && (
@@ -78,7 +109,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: 280, opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
-            className={`relative z-20 flex flex-col shrink-0 glass-sidebar overflow-hidden ${rtlMode ? 'order-last border-r-0 border-l border-l-[#d4af37]/25' : ''}`}
+            className={`${isMobile ? 'fixed top-0 bottom-0 left-0 z-40 shadow-2xl' : 'relative z-20'} flex flex-col shrink-0 glass-sidebar overflow-hidden ${rtlMode ? (isMobile ? 'left-auto right-0' : 'order-last border-r-0 border-l border-l-[#d4af37]/25') : ''}`}
           >
             {/* Arabic Calligraphy Watermark in Sidebar */}
             <ArabicCalligraphyBg density="heavy" />
@@ -87,10 +118,19 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#d4af37] to-transparent z-10" />
 
             {/* Logo Area */}
-            <div className="h-20 flex items-center justify-center border-b border-[#d4af37]/20 shrink-0 px-4">
-              <h1 className="text-[#d4af37] font-bold text-center leading-tight truncate px-2 text-sm md:text-base font-arabic drop-shadow-md">
+            <div className="h-20 flex items-center justify-between border-b border-[#d4af37]/20 shrink-0 px-4">
+              <h1 className="text-[#d4af37] font-bold leading-tight truncate px-2 text-sm md:text-base font-arabic drop-shadow-md">
                 {t('title', currentLanguage)}
               </h1>
+              {isMobile && (
+                <button
+                  type="button"
+                  onClick={() => setSidebarOpen(false)}
+                  className="p-1.5 rounded-lg text-emerald-300 hover:text-white"
+                >
+                  <X size={18} />
+                </button>
+              )}
             </div>
 
             {/* Navigation Menu Items */}
@@ -101,7 +141,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
                 return (
                   <button
                     key={item.id}
-                    onClick={() => setScreen(item.id as Screen)}
+                    onClick={() => handleNavClick(item.id as Screen)}
                     className={`w-full flex items-center gap-3.5 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer text-left ${
                       isActive
                         ? 'btn-gold font-bold shadow-[0_0_20px_rgba(16,185,129,0.3)] scale-[1.02] text-white'
@@ -121,7 +161,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             <div className="p-4 border-t border-[#d4af37]/20 space-y-2">
               {/* Account Settings */}
               <button
-                onClick={() => setScreen('account_settings')}
+                onClick={() => handleNavClick('account_settings')}
                 className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 cursor-pointer ${
                   currentScreen === 'account_settings'
                     ? 'bg-gradient-to-r from-[#10b981] to-[#047857] text-white font-bold shadow-[0_0_20px_rgba(16,185,129,0.4)] scale-[1.02]'
