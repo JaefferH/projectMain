@@ -178,7 +178,7 @@ export default function LandingPage() {
       {/* Fixed Immutable Signature Footer */}
       <footer className="relative z-10 w-full text-center pb-8 pt-4 bg-gradient-to-t from-black/60 to-transparent opacity-25 hover:opacity-75 transition-opacity">
         <div className="inline-block text-white/70 text-[10px] leading-relaxed tracking-wider font-light">
-          <p><span className="font-medium">Jaeffer Hussein</span> · <a href="mailto:Jaefferhussein@gmail.com" className="hover:underline">Jaefferhussein@gmail.com</a></p>
+          <p><a href="mailto:Jaefferhussein@gmail.com" className="hover:underline font-medium">Jaefferhussein@gmail.com™</a></p>
         </div>
       </footer>
     </div>

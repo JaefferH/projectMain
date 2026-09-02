@@ -56,9 +56,8 @@ export function SiteFooter() {
       <div className="border-t border-emerald-100 dark:border-emerald-900/40 px-4 py-5 text-center text-xs text-[#047857] dark:text-emerald-300 font-semibold space-y-1">
         <div>© {new Date().getFullYear()} {t("school.name")}. {t("footer.rights")}</div>
         <p className="opacity-70 hover:opacity-100 transition-opacity text-[11px] tracking-wider mt-1 text-[#047857] dark:text-emerald-400">
-          <span className="font-medium">Jaeffer Hussein</span> ·{" "}
           <a href="mailto:Jaefferhussein@gmail.com" className="hover:underline font-bold">
-            Jaefferhussein@gmail.com
+            Jaefferhussein@gmail.com™
           </a>
         </p>
       </div>
