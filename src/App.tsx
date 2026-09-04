@@ -129,21 +129,6 @@ function App() {
   const PUBLIC_PAGES = ['landing', 'auth', 'about', 'programs', 'contact', 'faq'];
   const isPublicPage = PUBLIC_PAGES.includes(currentScreen);
 
-  if (!authenticated || isPublicPage) {
-    return (
-      <ThemeProvider>
-        <LanguageProvider>
-          {currentScreen === 'auth' && <Portal />}
-          {currentScreen === 'about' && <About />}
-          {currentScreen === 'programs' && <Programs />}
-          {currentScreen === 'contact' && <Contact />}
-          {currentScreen === 'faq' && <Faq />}
-          {(currentScreen === 'landing' || (isPublicPage && currentScreen !== 'auth' && currentScreen !== 'about' && currentScreen !== 'programs' && currentScreen !== 'contact' && currentScreen !== 'faq')) && <Home />}
-        </LanguageProvider>
-      </ThemeProvider>
-    );
-  }
-
   const roleKey = (userRole || 'admin').toLowerCase();
   const isAdmin = roleKey.includes('admin');
   const isTeacher = roleKey.includes('teacher');
@@ -151,46 +136,57 @@ function App() {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen font-sans">
-          <MainLayout>
-            {isAdmin ? (
-              <>
-                {currentScreen === 'admin_dashboard'  && <AdminDashboard />}
-                {currentScreen === 'admin_students'   && <StudentLedgerHub />}
-                {currentScreen === 'admin_teachers'   && <TeacherLedgerHub />}
-                {currentScreen === 'admin_finance'    && <InstituteFinanceTracker />}
-                {currentScreen === 'admin_courses'    && <CourseManagement />}
-                {currentScreen === 'admin_teacher_attendance' && <TeacherAttendancePage />}
-                {currentScreen === 'admin_telegram'   && <TelegramHub />}
-                {currentScreen === 'admin_semester_closure' && <SemesterClosure />}
-                {currentScreen === 'admin_roster'     && <AdminRoster />}
-                {currentScreen === 'account_settings' && <AccountSettings />}
-                {!ADMIN_SCREENS.includes(currentScreen) && <AdminDashboard />}
-              </>
-            ) : isTeacher ? (
-              <>
-                {currentScreen === 'teacher_dashboard'  && <TeacherDashboard />}
-                {currentScreen === 'teacher_roster'     && <StudentRoster />}
-                {currentScreen === 'teacher_attendance' && <AttendanceSystem />}
-                {currentScreen === 'teacher_gradebook'  && <Gradebook />}
-                {currentScreen === 'teacher_schedule'   && <MySchedule />}
-                {currentScreen === 'teacher_salary'     && <MySalaryLedger />}
-                {currentScreen === 'account_settings'   && <AccountSettings />}
-                {!TEACHER_SCREENS.includes(currentScreen) && <TeacherDashboard />}
-              </>
-            ) : (
-              <>
-                {currentScreen === 'student_dashboard'  && <StudentDashboard />}
-                {currentScreen === 'student_grades'     && <StudentGrades />}
-                {currentScreen === 'student_attendance' && <StudentAttendance />}
-                {currentScreen === 'student_timetable'  && <StudentTimetable />}
-                {currentScreen === 'student_fees'       && <StudentFees />}
-                {currentScreen === 'account_settings'   && <AccountSettings />}
-                {!STUDENT_SCREENS.includes(currentScreen) && <StudentDashboard />}
-              </>
-            )}
-          </MainLayout>
-        </div>
+        {!authenticated || isPublicPage ? (
+          <>
+            {currentScreen === 'auth' && <Portal />}
+            {currentScreen === 'about' && <About />}
+            {currentScreen === 'programs' && <Programs />}
+            {currentScreen === 'contact' && <Contact />}
+            {currentScreen === 'faq' && <Faq />}
+            {(currentScreen === 'landing' || (isPublicPage && currentScreen !== 'auth' && currentScreen !== 'about' && currentScreen !== 'programs' && currentScreen !== 'contact' && currentScreen !== 'faq')) && <Home />}
+          </>
+        ) : (
+          <div className="min-h-screen font-sans dark">
+            <MainLayout>
+              {isAdmin ? (
+                <>
+                  {currentScreen === 'admin_dashboard'  && <AdminDashboard />}
+                  {currentScreen === 'admin_students'   && <StudentLedgerHub />}
+                  {currentScreen === 'admin_teachers'   && <TeacherLedgerHub />}
+                  {currentScreen === 'admin_finance'    && <InstituteFinanceTracker />}
+                  {currentScreen === 'admin_courses'    && <CourseManagement />}
+                  {currentScreen === 'admin_teacher_attendance' && <TeacherAttendancePage />}
+                  {currentScreen === 'admin_telegram'   && <TelegramHub />}
+                  {currentScreen === 'admin_semester_closure' && <SemesterClosure />}
+                  {currentScreen === 'admin_roster'     && <AdminRoster />}
+                  {currentScreen === 'account_settings' && <AccountSettings />}
+                  {!ADMIN_SCREENS.includes(currentScreen) && <AdminDashboard />}
+                </>
+              ) : isTeacher ? (
+                <>
+                  {currentScreen === 'teacher_dashboard'  && <TeacherDashboard />}
+                  {currentScreen === 'teacher_roster'     && <StudentRoster />}
+                  {currentScreen === 'teacher_attendance' && <AttendanceSystem />}
+                  {currentScreen === 'teacher_gradebook'  && <Gradebook />}
+                  {currentScreen === 'teacher_schedule'   && <MySchedule />}
+                  {currentScreen === 'teacher_salary'     && <MySalaryLedger />}
+                  {currentScreen === 'account_settings'   && <AccountSettings />}
+                  {!TEACHER_SCREENS.includes(currentScreen) && <TeacherDashboard />}
+                </>
+              ) : (
+                <>
+                  {currentScreen === 'student_dashboard'  && <StudentDashboard />}
+                  {currentScreen === 'student_grades'     && <StudentGrades />}
+                  {currentScreen === 'student_attendance' && <StudentAttendance />}
+                  {currentScreen === 'student_timetable'  && <StudentTimetable />}
+                  {currentScreen === 'student_fees'       && <StudentFees />}
+                  {currentScreen === 'account_settings'   && <AccountSettings />}
+                  {!STUDENT_SCREENS.includes(currentScreen) && <StudentDashboard />}
+                </>
+              )}
+            </MainLayout>
+          </div>
+        )}
       </LanguageProvider>
     </ThemeProvider>
   );

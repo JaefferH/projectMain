@@ -2,11 +2,9 @@ import { useState, useRef, useEffect } from "react";
 import { Lock, Eye, EyeOff, Globe, ChevronDown, Check, Shield, GraduationCap, UserCheck, Sparkles } from "lucide-react";
 import { useAppStore } from "@/store/useAppStore";
 import { languages, useI18n, type Lang } from "@/lib/i18n";
-import { useTheme } from "@/lib/theme";
 
 function Portal() {
   const { t, lang, setLang } = useI18n();
-  const { theme, toggle } = useTheme();
   const { setScreen, login } = useAppStore();
   
   const [staffId, setStaffId] = useState("");
@@ -104,10 +102,10 @@ function Portal() {
     setLoading(false);
   };
 
-  const isDark = theme === 'dark';
+  const isDark = true;
 
   return (
-    <div className={`grid min-h-screen lg:grid-cols-2 ${isDark ? 'bg-[#021a12] text-white' : 'bg-[#f4fbf7] text-[#042c22]'} transition-colors duration-300`}>
+    <div className="dark grid min-h-screen lg:grid-cols-2 bg-[#021a12] text-white transition-colors duration-300">
       {/* Left Branding Hero (Desktop) */}
       <div className="relative hidden overflow-hidden bg-[#042f22] text-white lg:block border-r border-[#34d399]/30">
         <div className="pattern-grid pointer-events-none absolute inset-0 text-white/10" />
@@ -136,7 +134,7 @@ function Portal() {
       </div>
 
       {/* Right Form Container */}
-      <div className={`flex items-center justify-center p-4 sm:p-8 md:p-12 ${isDark ? 'bg-[#021a12] text-white' : 'bg-[#f4fbf7] text-[#042c22]'} transition-colors duration-300`}>
+      <div className="flex items-center justify-center p-4 sm:p-8 md:p-12 bg-[#021a12] text-white transition-colors duration-300">
         <div className="mx-auto w-full max-w-sm">
           {/* Header & Controls */}
           <div className="mb-6 flex items-center justify-between">
@@ -155,7 +153,7 @@ function Portal() {
                 <button
                   type="button"
                   onClick={() => setLangMenuOpen((v) => !v)}
-                  className={`rounded-xl border ${isDark ? 'border-emerald-700/60 bg-[#042f22] text-emerald-100 hover:bg-emerald-800' : 'border-emerald-300 bg-white text-[#042c22] hover:bg-emerald-50'} px-2.5 py-1.5 text-xs font-bold cursor-pointer transition-colors shadow-sm flex items-center gap-1.5`}
+                  className="rounded-xl border border-emerald-700/60 bg-[#042f22] text-emerald-100 hover:bg-emerald-800 px-2.5 py-1.5 text-xs font-bold cursor-pointer transition-colors shadow-sm flex items-center gap-1.5"
                 >
                   <Globe className="h-3.5 w-3.5 text-emerald-400" />
                   <span>{languages.find((l) => l.code === lang)?.label}</span>
@@ -163,8 +161,8 @@ function Portal() {
                 </button>
 
                 {langMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-white dark:bg-[#042f22] border border-emerald-300 dark:border-emerald-700/60 shadow-2xl p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-emerald-600 dark:text-[#6ee7b7] border-b border-slate-200 dark:border-emerald-800 mb-1">
+                  <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-[#042f22] border border-emerald-700/60 shadow-2xl p-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="px-3 py-1.5 text-[10px] font-extrabold uppercase tracking-widest text-[#6ee7b7] border-b border-emerald-800 mb-1">
                       Language / ቋንቋ
                     </div>
                     {languages.map((l) => {
@@ -179,30 +177,21 @@ function Portal() {
                           }}
                           className={`flex w-full items-center justify-between px-3 py-2 text-xs font-extrabold rounded-xl transition-colors cursor-pointer ${
                             isSelected
-                              ? "bg-emerald-100 text-[#047857] dark:bg-[#6ee7b7]/20 dark:text-[#6ee7b7]"
-                              : "text-[#042c22] dark:text-emerald-100 hover:bg-emerald-50 dark:hover:bg-emerald-900/40"
+                              ? "bg-[#6ee7b7]/20 text-[#6ee7b7]"
+                              : "text-emerald-100 hover:bg-emerald-900/40"
                           }`}
                         >
                           <span className="flex items-center gap-2">
                             {l.code === "en" ? "🇬🇧" : l.code === "am" ? "🇪🇹" : "🇸🇦"}
                             <span>{l.label}</span>
                           </span>
-                          {isSelected && <Check className="h-3.5 w-3.5 text-[#047857] dark:text-[#6ee7b7]" />}
+                          {isSelected && <Check className="h-3.5 w-3.5 text-[#6ee7b7]" />}
                         </button>
                       );
                     })}
                   </div>
                 )}
               </div>
-
-              <button
-                type="button"
-                onClick={toggle}
-                aria-label={t("theme.toggle")}
-                className={`rounded-xl border ${isDark ? 'border-emerald-700/60 bg-[#042f22] text-emerald-100 hover:bg-emerald-800' : 'border-emerald-300 bg-white text-[#042c22] hover:bg-emerald-50'} px-2.5 py-1.5 text-xs font-bold cursor-pointer transition-colors shadow-sm`}
-              >
-                {isDark ? "☀" : "☾"}
-              </button>
             </div>
           </div>
 
@@ -251,7 +240,7 @@ function Portal() {
 
           <form className="mt-5 space-y-4" onSubmit={handleSignIn}>
             <div>
-              <label htmlFor="staff-id" className={`text-xs sm:text-sm font-bold ${isDark ? 'text-white' : 'text-[#042c22]'}`}>
+              <label htmlFor="staff-id" className="text-xs sm:text-sm font-bold text-white">
                 {t("portal.id")}
               </label>
               <input
@@ -266,11 +255,11 @@ function Portal() {
                 value={staffId}
                 onChange={(e) => setStaffId(e.target.value)}
                 placeholder="e.g. admin, teacher1, or SBI0001"
-                className={`mt-1.5 w-full rounded-xl border ${isDark ? 'border-emerald-700/60 bg-[#042f22] text-white placeholder:text-emerald-300/40' : 'border-emerald-300 bg-white text-[#042c22] placeholder:text-emerald-700/50'} px-3.5 py-3 text-sm font-bold outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm transition-colors duration-200`}
+                className="mt-1.5 w-full rounded-xl border border-emerald-700/60 bg-[#042f22] text-white placeholder:text-emerald-300/40 px-3.5 py-3 text-sm font-bold outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm transition-colors duration-200"
               />
             </div>
             <div>
-              <label htmlFor="password" className={`text-xs sm:text-sm font-bold ${isDark ? 'text-white' : 'text-[#042c22]'}`}>
+              <label htmlFor="password" className="text-xs sm:text-sm font-bold text-white">
                 {t("portal.password")}
               </label>
               <div className="relative mt-1.5">
@@ -286,12 +275,12 @@ function Portal() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className={`w-full rounded-xl border ${isDark ? 'border-emerald-700/60 bg-[#042f22] text-white placeholder:text-emerald-300/40' : 'border-emerald-300 bg-white text-[#042c22] placeholder:text-emerald-700/50'} px-3.5 py-3 pr-10 text-sm font-bold outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm transition-colors duration-200`}
+                  className="w-full rounded-xl border border-emerald-700/60 bg-[#042f22] text-white placeholder:text-emerald-300/40 px-3.5 py-3 pr-10 text-sm font-bold outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm transition-colors duration-200"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className={`absolute right-3 top-3 p-1 ${isDark ? 'text-emerald-300 hover:text-white' : 'text-emerald-700 hover:text-[#042c22]'} cursor-pointer transition-colors`}
+                  className="absolute right-3 top-3 p-1 text-emerald-300 hover:text-white cursor-pointer transition-colors"
                   aria-label="Toggle password visibility"
                 >
                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -312,7 +301,7 @@ function Portal() {
           <button
             type="button"
             onClick={() => setScreen('landing')}
-            className="mt-6 inline-block text-xs sm:text-sm font-bold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer"
+            className="mt-6 inline-block text-xs sm:text-sm font-bold text-emerald-400 hover:underline cursor-pointer"
           >
             {"← " + t("portal.back")}
           </button>

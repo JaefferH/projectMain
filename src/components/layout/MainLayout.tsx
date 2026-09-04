@@ -72,7 +72,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <div
-      className={`flex h-screen overflow-hidden ${rtlMode ? 'font-arabic' : 'font-sans'} relative bg-[#021a12] text-white`}
+      className={`dark flex h-screen overflow-hidden ${rtlMode ? 'font-arabic' : 'font-sans'} relative bg-[#021a12] text-white`}
     >
       {/* ── Global Background: Portal Islamic Luxury Theme ── */}
       <div className="absolute inset-0 z-0 bg-[#021a12]">
